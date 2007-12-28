@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: Snakelets
+Version: 1.44
+Summary: Simple Python web application server with Snakelets and Python Server Pages
+Home-page: http://snakelets.sourceforge.net/
+Author: Irmen de Jong
+Author-email: irmen@users.sourceforge.net
+License: MIT
+Description: A simple to use Python web application server.  Provides web server, Python Server Pages and Snakelets (very similar to Java JSP/servlets).
+Platform: any

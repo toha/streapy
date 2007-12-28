@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Starting the server</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Starting the server, configuring </h2>
+<h3>Requirements</h3>
+<p>You'll need at least Python 2.3 to run Snakelets.</p>
+<p>Please consider installing the <em>sendfile(2)</em> system call extension module <a href=
+    "http://www.snakefarm.org/">from Snakefarm.org</a> (works on Linux) or the one 
+<a href="http://tautology.org/software/python-modules/sendfile">from Ben Woolley</a> (which works on Linux and BSD too).
+This module may improve performance and CPU utilization in some cases (experiment!). Snakelets will automatically use it if it is installed (doesn't matter which one of the two mentioned above). </p>
+<h3>Out-of-the-box startup</h3>
+<p>It is possible to start the Snakelets server out-of-the-box, without changing anything. If you don't enable the virtual host feature (see below), Snakelets will scan the &quot;webapps&quot; directory and will load all web applications it finds on the current host. If you have a web app named &quot;ROOT&quot; that one will be used as the web application for the root context '/'. You can just start the <code>serv.py</code> script without configuring anything and away you go. The default port number is 9080, so you can access the server with the following url: <code>http://machinename.domain:9080/</code> . </p>
+<p><em>Warning:</em> the default config works but is very likely not the one that you want for your own server environment. One of the things you will have to change is removing the example plugins (if any) and webapps that come with Snakelets!</p>
+<h3>Apache?</h3>
+<p>...is not needed: Snakelets contains its own multithreaded web server. But if you still want to use Apache, you can use <em>mod_proxy</em> or <em>mod_rewrite</em> to let Apache forward certain requests to a running snakelets server behind it. Plans exist to develop a snakelets module for tighter integration in Apache, and for more performance. But for now, you'll have to use <em>mod_proxy</em> (or <em>mod_rewrite</em>).</p>
+<p><em>Configuring Apache; </em><em>bottom line:</em> Set up apache to reverse-proxy everything after <code>snake/</code> to Snakelets.</p>
+<p><em>Warning: as the Apache manual also states, regarding the use of proxies: please secure your Apache configuration: do not let it become an open proxy server! </em></p>
+<p>Edit your Apache config file. Make sure that <code>mod_proxy</code> is loaded in the <code>LoadModule</code> section. <br />
+Configure the forwarding to the Snakelets server:</p>
+<blockquote>
+  <pre>
+ProxyRequests Off
+ProxyPass /snake/ http://localhost:9080/snake/
+ProxyPassReverse /snake/ http://localhost:9080/snake/</pre>
+</blockquote>
+<p>This example forwards all requests starting with '/snake/' to Snakelets. You can also configure a dedicated virtual host, for example: </p>
+<blockquote>
+  <pre>&lt;VirtualHost snakelets.host.domain&gt;
+  ServerName snakelets.host.domain
+  ProxyRequests Off 
+  ProxyPass / http://localhost:9080/<br />  ProxyPassReverse / http://localhost:9080/<br />&lt;/VirtualHost&gt;</pre>
+</blockquote>
+<p>Now <em>all</em> requests to this hostname will be passed to Snakelets.</p>
+<p> Then run Snakelets where you set (in serv.py) <code>bindname='localhost'</code>, <code>serverURLprefix='/snake/'</code> and <code>externalPort=80</code>. If you use the virtualhost mapping, the serverURLprefix is empty. </p>
+<p><em>Note:</em> if you are using <code>mod_cache</code>, you must tell it to <em>not cache</em> the Snakelets urls! This can
+    be done like this:
+<pre>
+    &lt;IfModule mod_cache.c&gt;
+      CacheDisable /your-snakelet-url-base
+    &lt;/IfModule&gt;
+</pre>
+</p>
+<p>If you find that your URLs are not correct in Snakelets, you also have to enable virtual hosting in Snakelets (see below) and create a virtual host entry for the 'correct' hostname (i.e. the hostname that is used in your URLs). (You can still use a different bindname such as &quot;localhost&quot;).</p>
+<h3>Virtual Hosts</h3>
+<p>Snakelets supports virtual hosting (based on hostnames). To enable this feature you have to edit the <em>Virtual Host</em> configuration. It tells the server what web applications to load and to what host names they must be connected. If you have different hostnames that point to the same IP address you are able to serve different web sites this way (this only works with HTTP 1.1 browsers, but most browsers are). The configuration file is <code>webapps/__init__.py</code> (the webapp module init file). It contains four configuration items: </p>
+<ul>
+  <li><code>ENABLED</code> - set this to <code>True</code> to enable virtual hosts. Setting it to <code>False</code> disables this feature and reverts back to out-of-the-box startup (see above).</li>
+  <li><code>virtualhosts</code> - a mapping of host names to a sequence of web application names that will be connected to the specified hostname. If a web application is not mentioned for any virtual host, it won't be loaded. A web app may be connected to multiple vhosts.</li>
+  <li><code>webroots</code> - a mapping of host names to the name of the web app that will be mapped in the URL root ( '/' ) of the server on that virtual host. The web root hosts must be known virtualhosts specified in the <code>virtualhosts</code>.</li>
+  <li><code>aliases</code> - a mapping of vhost-alias name to real-vhost name (this avoids duplicate loading of webapps).</li>
+  <li><code>defaultvhost</code> - the name of the default virtual host that will be used when the browser doesn't send a 'Host' header.</li>
+</ul>
+<p>Every vhost can have a different list of webapps that are deployed on it, but a webapp can also be deployed on
+multiple vhosts at the same time. However, all deployed instances will be separate, unrelated copies of the webapp:
+if you deploy a webapp on multiple vhosts, it will be created for each vhost, and the <code>init</code> function
+will be invoked once for every copy.</p>
+<h3>Starting the server</h3>
+<p>If the virtual host config is in place, the Snakelet server is best started using the provided <code>serv.py</code> script. Just execute this and you're ready to go! Notice that the web applications that you configured in the virtual host config are installed automatically, any other web applications in the <code>webapps</code> directory are ignored. The parameters to <code>snakeserver.server.main</code> are: </p>
+<ul>
+  <li><code>HTTPD_PORT</code> - the port the http server will be listening on (default=9080). Note: on most operating systems you have to be root (have admin rights) to be able to use ports below 1024.
+    So for instance, if you want to run Snakelets on port 80 (default HTTP), you will have to start the server with root privileges (for instance with &quot;sudo python serv.py&quot;).
+    You also have to configure the runas-user that the server will change back to after allocating the privileged objects
+    (see below)</li>
+  <li><code>externalPort</code> - the port the server is visible on from the outside world (default=same as HTTPD_PORT). If you're running behind a forwarding proxy you may need to set this. 'External' hostnames are handled by the virtual host configuration.</li>
+  <li><code>bindname</code> - the hostname the server will bind on, None (default) means only the current host</li>
+  <li><code>serverURLprefix</code> - URL prefix for <em>all</em> urls that this server uses (for instance, &quot;/snakelets). Default is '' (empty). 
+    Internally it will be molded into the form &quot;/prefix&quot;; slashes will be added/stripped automatically if required.</li>
+  <li><code>debugRequests</code> - should the incoming requests and headers be printed? Default is False (boolean).</li>
+  <li><code>precompileYPages</code> - should all Ypages be precompiled to find possible errors early? Default is True (boolean). You may want to set this to False to allow faster startup times, but then you won't find out if an Ypage can't compile until the page is actually requested. (This feature needs Python2.3+)</li>
+  <li><code>writePageSource</code> - should the generated Ypage source code be written to a file in the <code>tmp</code> directory? Default is False (boolean). You may want to set this to True for easier Ypage debugging.</li>
+  <li><code>serverRootDir</code> - the root directory for the Snakelet server (i.e. the directory that contains the logging config, the webapps and userlibs directories etc). Default is None. If not specified, the current directory is used.</li>
+  <li><code>runAsUser</code> - the username that you want the server process to run as (used if you need to start the server as root)</li>
+  <li><code>runAsGroup</code> - the groupname that you want the server process to run as (used if you need to start the server as root)</li>
+</ul>
+<p>It is also possible to use the <code>monitor.py</code> script. This script is designed to run on Linux, and will check if the server is active. If it's not active (or hanging) the monitor script will restart the Snakelets server (as a daemon process in the background). 
+After starting the server it does not check anymore if it's still running, so you will have to create
+your own mechanism to be sure that a stopped (crashed?) server is restarted.</p>
+<h3>Logging</h3>
+<p>The server uses the standard Python logging module to log messages (if you're not using Python 2.3 or newer, you'll have to install the logging package yourself first). Logfiles appear in the &quot;logs&quot; directory. Logging configuration is in the &quot;logging.cfg&quot; file. There are a few loggers: </p>
+<ul>
+  <li>&quot;Snakelets.logger&quot; is the logger that is used for server messages. Default logfile is &quot;logs/server.log&quot;. It is a rotating logfile, 10 times 100Kb.</li>
+  <li>&quot;Snakelets.logger.accesslog&quot; is used for logging the web server requests (apache-style access log). Default logfile is &quot;logs/access.log&quot;. It's a rotating logfile, 10 times 100Kb. The loglevel is set to 'NOTSET'. If you set it to 'CRITICAL', no access logging is performed (improves server speed; access logging slows it down).</li>
+  <li>&quot;Snakelets.logger.stdout&quot; and &quot;Snakelets.logger.stderr&quot; are the logger adapters for the standard output and standard error messages. These messages are printed on the console but are also written to &quot;logs/server_console.log&quot;</li>
+</ul>
+<p>You can use the logging facility in your own code by doing: </p>
+<pre>
+import logging
+log=logging.getLogger(&quot;Snakelets.logger&quot;)
+log.debug(&quot;my debug message&quot;)
+</pre>
+<h3>User libraries / modules</h3>
+<p>If you want to use a library or module from within several webapps, you don't have to include it in every webapp directory. There is a special directory &quot;userlibs&quot; in which you can place your modules and packages that you want to install. Snakelets adds this directory to the module search path, so you can import anything in it in your webapps without using nasty prefixes.</p>
+<p>You can also easily upgrade libraries this way, just put the new version in userlibs instead of the older version and all your webapps that import it will instantly use the new code the next time you start the server. </p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

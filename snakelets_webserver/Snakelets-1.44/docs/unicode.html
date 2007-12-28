@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Unicode</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>International characters, Unicode, encodings</h2>
+<p>A lot can be said about this, but Snakelets tries to support them as much as possible, and seems to succeed in this. </p>
+<h3><strong>URLs</strong></h3>
+<p>It is possible to put non-ASCII characters in the URL that your browser submits to the web server. The w3c is vague on this subject. It is not specified how these URLs are encoded when sent to the web server. Internet Explorer and Mozilla-like browsers support a global setting that lets you specify to encode all URLs in UTF-8, which is convenient. If you don't activate this setting, it depends on the system how the URLs are encoded.</p>
+<p> If you expect non-ASCII characters in URLs, which can happen if you're using a FORM that is submitted using the GET method, you <em>have</em> to set the expected encoding on the Request object before you extract parameters from the form. That's why the above mentioned browser setting is handy; enable it and you can set <code>request.setEncoding(&quot;UTF-8&quot;)</code> before getting the parameters from the request. </p>
+<h3><strong>page source code (html, ypage, snakelet)</strong></h3>
+<p>For static HTML pages, follow the standard HTML rules concerning HTML source that contains international characters.
+    For snakelets, follow the standard Python rules concerning non-ASCII characters in Python source code (source file encoding tag, etc)
+    For Ypages, use the @inputencoding declaration to set the character encoding that the Ypage file is stored in. This is the Ypage analogy of Python's 
+    source file encoding tag. Note: the Ypage can <em>not</em> be stored in a multi-byte character encoding like UTF-16 that uses more than a single byte per normal character! 
+    Remember that you have to use unicode string literals for non-ascii strings. Also you probably need to set a page output encoding to be
+    able to show the non-ascii symbols without getting encoding exceptions!</p>
+<h3><strong>page output</strong></h3>
+<p>You can use <code>defaultOutputEncoding</code> in the webapp's config to set a global output encoding. You can also do this manually in every page that needs it:<br />
+  For snakelets: use <code>response.setEncoding(...)</code> to set the desired character for the response data. After that, just write unicode strings to the output. For Ypages: use the @outputencoding declaration. To make it easier to include pages with or without outputencodings in eachother, the following algorithm is used by the Ypage parser, if pages are included in each other: </p>
+<blockquote>
+  <p> if parent page has no output encoding: set parent's output encoding to included page's encoding <br />
+    if parent already has output encoding: do nothing (keep parent's encoding)</p>
+</blockquote>
+<p>If a page redirects to another page, the actual page output encoding is determined as follows: </p>
+<blockquote>
+  <p> if current page already has output encoding set, use this;<br />
+    otherwise: use the output encoding from the page that is being redirected to;<br />
+    if that's also not specified: use the default output encoding.</p>
+</blockquote>
+<h3><strong>submitted FORM data</strong></h3>
+<p>If you expect non-ASCII characters in your FORM data, you have to set the encoding on the request object before doing anything else with it: <code>request.setEncoding(...)</code>. 
+    (You can also set a <code>defaultRequestEncoding</code> in the webapp init file). Also: you <em>have</em> to specify the corresponding encoding on the FORM tag in your page source too: use <code>accept-charset=&quot;...&quot;</code> on the FORM tag. For Internet Explorer it may also be necessary to send the page containing the form in the same encoding as the accept-charset on the FORM, to make it completely correct.</p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

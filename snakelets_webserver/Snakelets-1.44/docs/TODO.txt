@@ -1,0 +1,4 @@
+
+Todo list is now online on a wiki page: http://www.razorvine.net/python/SnakeletsServer
+
+--Irmen

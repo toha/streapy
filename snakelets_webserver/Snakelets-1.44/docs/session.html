@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Sessions</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Session object (User &amp; Session mgmt)</h2>
+<p>The Session object that you can get from the Request.getSession() provides some additional methods:</p>
+<table summary="Session class methods">
+  <tbody>
+    <tr>
+      <th>Method</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>getID()</td>
+      <td>the session ID (string). This is a rather long id that is cryptographically (i.e. very) hard to guess (it is constructed from several variables and then fed through SHA-1, a secure hash.
+        The variables are the remote client address, the current time in string format and numerical format, and a random number). </td>
+    </tr>
+    <tr>
+      <td>isNew()</td>
+      <td>if the session is brand new (this means that only the server knows about it, it has not been synchronised with the client yet).</td>
+    </tr>
+    <tr>
+      <td>loginUser(user)</td>
+      <td>set logged in user object - this must be an instance of <code>snakeserver.user.LoginUser</code>. This class stores userid, password(hash), a user name and a set of privileges. Often this is enough. If you need more, you have to create your own subclass (don't forget to call <code>__init__</code>). For more information about the built-in LoginUser class, see <a href="authorization.html">authentication</a>.</td>
+    </tr>
+    <tr>
+      <td>logoutUser()</td>
+      <td>Logs out the current user. The session remains alive. Usually you also want to clear the session: see <code>Request.deleteSession()</code></td>
+    </tr>
+    <tr>
+      <td>getLoggedInUser()</td>
+      <td>get logged in user object (an instance of <code>snakeserver.user.LoginUser</code>, or a subclass thereof), or <code>None</code>. For more information about the built-in LoginUser class, see <a href="authorization.html">authentication</a>.</td>
+    </tr>
+    <tr>
+      <td>getContext()</td>
+      <td>the session context (ContextContainer object). Scope: session (Request.getSessionContext() is a shortcut for this) <em>unique per user, shared for all requests of this user</em></td>
+    </tr>
+  </tbody>
+</table>
+<p>For correct session management, the web browser must allow <em>session cookies</em> from the website. If cookies are not allowed, and the web browser accesses a page that uses a session, <em>every request from the browser will cause a new session to be created on the server</em> (to a certain limit that Snakelets enforces).</p>
+<p><strong>Test if cookies are enabled:</strong> There are various was to test if the web browser accepts cookies. The 'test' webapp that comes with Snakelets contains three examples that show how you can check for correct session-cookie acceptance (in a snakelet, in an Ypage, and using Javascript). The basic trick is to send a http refresh back to the browser, and when the next request comes in, the code checks for the existance of a &quot;valid&quot; session.</p>
+<p>The session cookie that is used is called <code>SNSESSID</code>, and has its path set to /webapp/ (the name of the webapp that is accessed) on the server from your URL. In case of shared sessions, the session cookie that is used is called <code>SNSESSIDSHR</code>, and has its path set to / (the root) on the server from your URL. The contents of the cookie is just the session id.</p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

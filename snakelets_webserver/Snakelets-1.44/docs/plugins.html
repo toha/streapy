@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Plugins</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Server plugins</h2>
+<p>Snakelets can be extended with your own server-wide or webapp-specific <em>plugins</em>. They are loaded by the server automatically when it starts up, and are triggered by the server on certain events. Writing a plugin is simple: create a new directory in the &quot;snakeserver/plugins/&quot; directory, with the name of your plugin. Create a package init file (__init__.py) in it that contains the init code of your plugin. It must contain the following: </p>
+<ul>
+  <li><code>PLUGINS=list-of-plugin-names</code> This one is required. You must give a list of the names of the plugin classes that are present in the plugin module. The names are the class names and will also be the name under which the plugin is known in the server, if not specified otherwise (see below). </li>
+  <li><code>ENABLED=True</code> or <code>ENABLED=False</code> to enable/disable the plugin. You may omit this (default=Enabled).</li>
+  <li>One or more classes (name them in the <code>PLUGINS</code> list) that inherit from one of the plugin base classes defined in <code>snakeserver.plugin</code>, for example:
+    <pre>
+from snakeserver.plugin import ServerPlugin
+class MyServerPlugin(ServerPlugin):<br />    ...
+</pre>
+  </li>
+</ul>
+<p>There is a separate &quot;plugins&quot; project available that contains various
+useful plugins such as HTTP-compression and a nicer directory lister. 
+See the download page for more information.</p>
+
+<h3>Adding plugins from your webapp</h3>
+<p>You can also add specific plugins for your webapp (the plugins above are server-wide plugins). You can call the <code>addPlugin</code> on the <code>webapp</code> object that you get in the webapp's <code>init</code> method. Create a plugin class like above, and call the <code>webapp.addPlugin(plugin)</code> method with an instance of your plugin class as argument. The plugin you define like this will only be called for your webapp, it is not a server-wide plugin. Its name will be the name of the class prefixed by &quot;<em>webappname</em>/&quot;, and it will have default plugin sequence priority.</p>
+<p>You have to add several specific <strong>plugin-methods</strong> to the class, depending on the type of plugin that you are writing. They will be called by the server at specific events. The following events are recognised:</p>
+<ul>
+  <li><em>initialization (done for ALL plugin types):</em> calls the <code>plug_init(server)</code> method when the plugin is loaded during startup (the server param is the HTTP server object that loads the plugin). No webapps have been loaded yet.</li>
+</ul>
+<p>The following events are used in the <code>ServerPlugin</code>: </p>
+<ul>
+  <li><em>server start:</em> calls the <code>plug_serverStart(self, server)</code> method (with the http server as argument) when the server is about to start accepting requests. All plugins and webapps have been loaded.</li>
+  <li><em>server stop:</em> calls the <code>plug_serverStop(self, server)</code> method (with the http server as argument) when the server is about to stop. All webapps have already been removed.</li>
+  <li><em>session creation:</em> calls the <code>plug_sessionCreated(self, session, webapp, request)</code> method, when a new http session has just been created.</li>
+  <li><em>session destruction:</em> calls the <code>plug_sessionDestroyed(self, session, webapp, request)</code> method, when a http session is going to be destroyed (timeout or explicit).</li>
+</ul>
+<p>You don't have to implement all of them, you can only provide the one(s) that are of interest for your plugin. </p>
+<h3>Specifying the plugin Name and Sequence priority</h3>
+<p>If you want to give plugins another name or a different sequence priority, define the following class attributes: <code>PLUGIN_NAME</code> (with the desired plugin name, this will then be used instead of the class name) and <code>PLUGIN_SEQ</code> (with the desired sequence priority, see plugin.py for a few of the defined standard priorities). You can also override the <code>__init__</code> method (don't forget to call the super class's <code>__init__</code> !) where you then set the attributes <code>self.name</code> and <code>self.sequence</code>. </p>
+<p>This works for server-installed plugins and for plugins defined in your webapp. </p>
+<h3>How to actually call the plugin functions?</h3>
+<p>You can add your own methods to your plugin class, and call them from the event callback methods described above. You can also give a <em>name</em> to your plugin, and when your snakelet or ypage code wants to use the plugin, it can look it up and then call your own custom methods. From within your snakelets or Ypage source you can use <code>self.getPlugin(pluginname)</code> and <code>self.getPluginNames()</code> to access the plugin(s). Those are Snakelet methods, see <a href="snakelet.html">Snakelets</a> for more info about them. You can also access the plugins from the web app's <code>init</code> and <code>close</code> functions (in the __init__.py of the webapp), they are called with the <code>webapp</code> argument, do this to get the plugins: <code>plugin = webapp.server.getPlugin(&quot;pluginname&quot;)</code>.</p>
+<p>The way a plugin can hook itself into the server is not yet standardized. The server calls various methods of the plugin when certain events occur (the Hollywood priciple; don't call us--we'll call you). If you wish you can access the server's internals trough the arguments that are passed. Use the source, Luke! :-) But when the API of the server changes you have to fix the plugins too. Perhaps later there are more options to hook into the server.</p>
+<h3>More information </h3>
+<p>Please read the &quot;plugin.py&quot; source module, and download the Plugins package and see how the plugins there are implemented. </p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

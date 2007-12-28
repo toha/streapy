@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Effective Ypages and Snakelets</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Effective Ypages and Snakelets</h2>
+<p>This chapter is a tutorial about creating effective and maintainable web pages.
+The following subjects are covered:</p>
+<ul>
+    <li>Ypage templating</li>
+    <li>Other ways of avoiding page code duplication</li>
+    <li>HTML- and URL-escaping</li>
+    <li>Building correct urls</li>
+    <li>Character encodings</li>
+    <li>Content-type</li>
+    <li>FORM handling</li>
+</ul>
+<p>For details on the different subjects, you must read the other chapters in this manual.
+This chapter is a summary to get you started quickly.</p>
+<p><em>This text is not yet finished, it will be more detailed in a future version</em></p>
+
+<h3>Ypage Templating and Inclusion</h3>
+<p>To avoid repeating parts of your page code over and over again in each page you should
+    define the general layout and common parts of your pages in one or more <em>template pages</em>.
+All your other Ypages can then just contain the template declaration, and only the page content
+that is different in each page. The template page could define a common header, menu, body layout,
+footer and script/css links, and the rest of the pages only define the body content.
+If you want to change the layout of the site you only have to update the template and all your
+pages will use the new layout.
+You can define a template page in every Ypage or define one global template for all pages
+using the webapp's <code>defaultPageTemplate</code> config variable.</p>
+<p>As a template page is just an Ypage, you can do all sorts of dynamic page creation code
+    inside it. It is even possible to pass page-specific variables from every templated ypage
+    into the template page, so that you may use that in the template (example: to give every page a 
+    page-specific title, where the title is defined in the templated page). These template args
+can be simple and static, or dynamically created using a special <em>page method</em>.</p>
+
+<h3>Other ways of avoiding page code duplication, and structuring your page code</h3>
+<p>Another possibility is to put parts of a page that are used over and over again inside a 
+separate Ypage that is not accessed directly. Rather, you <em>include</em> it inside other
+Ypages that want to use it. For instance: if you find that you are building a complicated
+table structure on several different pages, you can put the table code in a separate Ypage file
+and include it in the other pages. If you want to change the table, you only have to make
+changes in one file, and the table is changed on all pages.</p>
+<p>A more advanced way is to use <em>inheritance</em> to let your Ypage inherit from
+    another Ypage or even from a custom Python class. You can put common code in the base Ypage or
+    class and let multiple pages inherit from it, so that they will share the code.
+    It is possible to let the base Ypage handle the page creation (and refer to the inherited page)
+    by using the <code>pagemethod</code> declaration.
+    </p>
+<p>Ypages and Snakelets are essentially just Python classes so you an import and use other
+    modules and classes just like you would otherwise do to structure your Python program.
+    Put common code and/or code that is not related to the actual page content in a different
+module, and import that in your Ypage/Snakelet, so that the rest of the code can stay concise and clean.
+Use subdirectories to divide and group related pages (just as you would use packages in regular Python code).</p>
+
+<h3>HTML- and URL-escaping</h3>
+<p>Some characters are invalid inside HTML (such as &lt;, &gt;, &amp; and &quot;). If you
+    generate HTML, you have to make sure that you <em>escape</em> (also called <em>quote</em>)
+    those special characters. You should use the <code>self.escape(text)</code> method for this.
+Escaping is only needed at the place where you actually want to output the text on the page.</p>
+<p>The same counts for URLs. There are a few other characters that cannot occur in an URL because
+    they have a special meaning (/, +, ? and = for instance). If you need to put those in an URL
+    where they do <em>not</em> have that special meaning (for instance, where they are part of
+    the URL query params in case of a GET request with params), you have to <em>escape</em> them.
+You should use the <code>self.urlescape(path)</code> method for this.
+Note that the URL-escaped string may be a valid URL, but it may still contain characters
+        that are invalid in HTML! So if you want to place it inside your page text, you usually
+        have to run it trough the HTML escape function before outputting it on the page.</p>
+
+<h3>Building correct URLs, independent of server and webapp name</h3>
+<p>Generating correct URL links on your page is not a trivial task, if you want
+    your page code to be independent of the server name, port, webapp name, prefix and whatnot.
+URLs have the form: <code>http://server:port/serverprefix/webapp/... </code> (serverprefix is optional).
+If you only use <em>relative urls</em> (such as <code>&lt;a href=&quot;sub/page.y&quot;&gt;....</code>) 
+you don't have to worry about the url base part because the browser fills it in.
+But usually it is better to use an <em>absolute</em> url (in a menu, to avoid nesting issues) or
+even an url that includes the http: part, and the servername and port.
+You can hardcode these values in your pages but then they cease to work when you move to a different
+server or rename the webapp...
+</p>
+<table>
+    <tr><th colspan="2">Relevant functions</th></tr>
+    <tr><th>for <a href="ypage.html">Ypages</a></th><th>for Ypages <em>and</em> <a href="snakelet.html">Snakelets</a></th></tr>
+    <tr><td>
+These are shortcuts to functions defined
+<br/>elsewhere (see the column to the right)
+<br/>to make it easier to use inside an Ypage:
+<pre>self.URLprefix
+self.Assetprefix
+url(path)
+asset(path)
+</pre>
+</td><td>
+Defined on the Snakelet/Ypage class:
+<pre>self.getFullURL()
+self.getURL()
+self.urlescape(str)  # see above, at 'escaping'
+</pre>
+Defined on the <a href="webapp.html">Webapp</a>:
+<pre>wa.getURLprefix()
+wa.getAssetprefix()
+wa.mkUrl(path)
+wa.mkAssetUrl(path)
+</pre>
+Defined on the <a href="request.html">Request object</a>:
+<pre>req.getRequestURL()
+req.getRequestURLplain()
+req.getBaseURL()
+</pre>
+And perhaps some more (see relevant chapters)
+</td></tr>
+</table>
+<p><em>...explanation not yet written...</em></p>
+
+
+<h3>Character encoding: almost a non-issue</h3>
+<p>With other web servers, the correct handling of non-ASCII characters or symbols often is a pain.
+Not with Snakelets. You only have to set the output encoding of your page to the desired
+encoding (such as UTF-8), and optionally set the input encoding too (if your source file is
+written in a special character encoding), and Snakelets takes care of all the rest.
+<em>Don't</em> encode stuff yourself, just write those unicode strings to the page output!
+If you are careful about the way you add FORMs to your pages (see below), the <em>input</em>
+of special characters is painless too. Snakelets handles everything and you get to deal
+with Python strings (or unicode objects) only. All symbols are supported. The suggested
+character encoding is UTF-8 (it can contain all symbols, is widely supported, and
+works efficiently for most western languages).
+You can define a character encoding in every page or define one global setting for all pages
+using the webapp's <code>defaultOutputEncoding</code> config variable.</p>
+
+<h3>Content-type</h3>
+<p>Usually the default content type <code>text/html</code> is fine. But for special snakelets
+or Ypages you are not returning HTML, but a different file type (when you have created
+an image downloading snakelet, for instance). You have to specify the correct content type
+yourself in these cases.</p>
+<p><em>....write how to do this... defaultContentType....</em></p>
+
+<h3>FORM handling</h3>
+<p><em>...not yet written...</em></p>
+
+
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

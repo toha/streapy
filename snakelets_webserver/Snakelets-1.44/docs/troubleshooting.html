@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Troubleshooting</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Troubleshooting</h2>
+<p>If something strange happens, first look if the server wrote some message to the console. If not, check the server log! It contains a lot more information and usually the problem becomes clear from the messages that are logged there. </p>
+<p>Possible issues you may encounter when running Snakelets: </p>
+<dl>
+  <dt>&bull; You see the following error: &quot;Page ... caused an error: 'ascii' codec can't encode character ... ordinal not in range&quot; and/or &quot;UnicodeEncodeError: 'ascii' codec can't encode character&quot;</dt>
+  <dd>This may occur when your Ypage or snakelet doesn't specify an output encoding, or the wrong output encoding. When the page contains characters that can't be represented in the default output encoding (usually plain ASCII) you'll get this error. Specify a custom output encoding for the page to remove this error. You can do this in the page itself, or by setting a default output encoding in the webapp config file (which will then be in effect for all of your pages).<br />
+    It may also be the case that you have not specified the correct <em>input encoding</em> for the Request object, before extracting info (parameters) from it. The user may have typed in non-ASCII characters or you got a request URL containing non-ASCII characters (see above). Set the correct character encoding (<code>request.setEncoding(...)</code>) <em>before</em> using the request object.</dd>
+  <dt>&bull; I still get the &quot;UnicodeDecodeError: 'ascii' codec can't decode byte...&quot; error!</dt>
+  <dd>You may be using the wrong Python syntax for unicode string literals in your page/snakelets source. You must use 
+    the 'u' prefix for (unicode)string literals that contain non-ascii symbols. For more info see the International Characters/Unicode chapter.</dd>
+  <dt>&bull; You see the following error: maximum recursion depth exceeded</dt>
+  <dd>Your code contains a recursive loop, or you have a page that includes itself, which is essentially the same.</dd>
+  <dt>&bull; Snakelets crashes at startup with the error 'socket.error: permission denied'</dt>
+  <dd>The server cannot allocate the required server socket. Usually this is the case when you try to use a port number below 1024
+    and not starting the server with sufficient privileges (usually root). Fix this by configuring a runas-user in the startup script
+and start the server as root.</dd>
+  <dt>&bull; You see weird SyntaxErrors in your Ypages</dt>
+  <dd>Probably the generated code style doesn't fit your indenting style in the Ypage source. Make sure they match: see the &lt;%@indent%&gt; declaration. You can check this by letting Snakelets write the compiled ypage to disk (this is an option in the startup script), and loading the source file in an editor. Then check if your indenting style is okay (tabs/spaces).</dd>
+  <dt>&bull; You get a 404 server error 'no context enabled for URL....'</dt>
+  <dd>There is no webapp running on the url (-prefix) that you are using. If you are using virtual hosts in the webapp config file, make sure that there is a virtual host mapping defined for the hostname that you are using in your URL.</dd>
+  <dt>&bull; Snakelet only starts when logged in, but you need it to start as soon as your computer boots</dt>
+  <dd>On Linux this is rather easy, just make it a long running process using the monitor.py script (supplied) or add a 'service' to the rc.d configuration,
+on windows you can use the Windows Scheduled Tasks or use the 'srvany' tool. </dd>
+  <dt>&bull; Your user defined HTTP response headers don't work, content-type is wrong etc.</dt>
+  <dd>A possible cause is that you are calling response.getOutput() too early. You have to call header-manipulation methods first, 
+   and call getOutput() as late as possible. Once you have the output stream, it is no longer possible to modify HTTP-header related response data.</dd>
+  <dt>&bull; Your server crashes at startup with errors that contain things like KeyError: 'log_file' and 'No handlers could be found for logger'.</dt>
+  <dd>This is likely because your logging config is broken and/or the server cannot write to the logfiles location. Check directory permissions.</dd>
+  <dt>&bull; Page output is garbled (wrong sequence) and/or contenttype is wrong, when using page includes.</dt>
+  <dd>These are known bugs in the current code when using multi-level includes. Try to rewrite your code so that it doesn't use nested includes.</dd>
+</dl>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

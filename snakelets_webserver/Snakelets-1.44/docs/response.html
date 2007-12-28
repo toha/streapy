@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Response</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Response object</h2>
+<p>Your snakelet gets the current request and response objects in the serve method, and you can do lots of stuff with them: </p>
+<p><strong>Scope: request</strong> </p>
+<table summary="Response class methods">
+  <tbody>
+    <tr>
+      <th>Method</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>getOutput()</td>
+      <td>get the response output stream (socket/file). Notice that once you obtain the output stream, a number
+        of methods will no longer work on the response object (more precisely: the methods that modify the
+        HTTP headers that will be returned). So you have to take care of those first,
+        before getting the output stream (try to call getOutput() as late as possible).
+        The things you can no longer do after calling getOutput() include the following:
+        setResponse, setHeader, setEncoding, setContentType, setContentDisposition, setContentLength, setCookie, delCookie.
+        </td>
+    </tr>
+    <tr>
+      <td>setContentType(type)</td>
+      <td>set the content type (mime type) of the response (default is &quot;text/html&quot;)</td>
+    </tr>
+    <tr>
+      <td>setContentDisposition(disposition)</td>
+      <td>set the content disposition (RFC 2183) of the response; you can control downloads with this. For example: setContentDisposition('attachment; filename=&quot;foobar.txt&quot;')</td>
+    </tr>
+    <tr>
+      <td>setContentLength(len)</td>
+      <td>set the content length (number of bytes of the response data). This is useful if you know the exact size of your response in advance. <em>Note:</em> you cannot use this together with a custom content character encoding! If you are 100% certain that you are providing the correct length in bytes (after the character encoding has been applied!) you can give a second parameter, &quot;force=True&quot; to set the length even if a custom encoding has been set. Note that the server often determines the correct content-length by itself. Only in the case of snakelets it's left to you.</td>
+    </tr>
+    <tr>
+      <td>setEncoding(enc)</td>
+      <td>set character encoding of the response ('UTF-8' etc). You usually are required to set a specific character encoding if your page contains characters that are not in the plain ASCII character set. Notice that you must call getOutput() <em>after</em> this method! Set the encoding first, and get the output stream object after that. Also, you cannot use setContentLength() anymore.</td>
+    </tr>
+    <tr>
+      <td>guessMimeType(filename)</td>
+      <td>possible mime type for this file (string)</td>
+    </tr>
+    <tr>
+      <td>setHeader(header, value)</td>
+      <td>set a custom HTTP header</td>
+    </tr>
+    <tr>
+      <td>getHeader(header)</td>
+      <td>get a custom HTTP header previously set by <code>setHeader</code>, returns None if header wasn't set</td>
+    </tr>
+    <tr>
+      <td>setResponse(code, msg=&quot;output follows&quot;)</td>
+      <td>set the HTTP response code (int) and response message (string)</td>
+    </tr>
+    <tr>
+      <td>HTTPredirect(URL)</td>
+      <td>send a HTTP 302 client-side redirect to the specified URL The URL can be absolute (&quot;http://.../...&quot;) or relative to this host (&quot;/.../...&quot;) server-side redirection/inclusion is done on the Snakelet interface.</td>
+    </tr>
+    <tr>
+      <td>sendError(code, message=None)</td>
+      <td>send HTTP error with specified HTTP error code (int) and message (string)</td>
+    </tr>
+    <tr>
+      <td>getCookies()</td>
+      <td>return cookies set for sending (Cookie.SimpleCookie object)</td>
+    </tr>
+    <tr>
+      <td>setCookie(name, value, path=None, domain=None, maxAge=None, comment=None, secure=None)</td>
+      <td>Add a cookie that will be sent to the client. Be careful what you provide as <em>path</em>, when you don't specify it, a default path will be used, that can be quite different from what you expect (especially when you use internal page redirection).</td>
+    </tr>
+    <tr>
+      <td>delCookie(name, path=None, domain=None, comment=None, secure=None)</td>
+      <td>Make the client browser delete the specified cookie. Be careful what you provide as <em>path</em>, if it isn't exactly the same as when you originally set the cookie, it won't be deleted!</td>
+    </tr>
+    <tr>
+      <td>kill()</td>
+      <td>tries to abort the response connection.</td>
+    </tr>
+  </tbody>
+</table>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

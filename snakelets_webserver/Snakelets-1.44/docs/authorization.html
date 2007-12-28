@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Authorization</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>User Authentication and Authorization</h2>
+<p>The built-in <code>LoginUser</code> class is the base class for all User objects that Snakelets uses. If you declare on a page or in a snakelet that the session requires a logged in user, Snakelets will only allow a visitor to access that page if there is a logged in user on the session. You have to code that login mechanism yourself, but Snakelets then uses the authenticated user object for various security related things.</p>
+<h3><strong>The LoginUser class</strong></h3>
+<p>The class contains the following properties, and some methods, that will be explained below:</p>
+<ul>
+    <li><code>userid</code> (read-only)
+    <li><code>name</code> (read/write)
+    <li><code>password</code> (read/write)
+    <li><code>privileges</code> (read/write/delete)
+</ul>
+<p><strong>Passwords:</strong> the <code>password</code> attribute of the User object contains a secure hash of the user's userid+password (not the password itself!). You must use the <code>checkPassword()</code> method to check if the given password is equal to the password of that user. Note that the hash is a binary string and that you may have to convert it to hex codes or similar if you want to store or print it.</p>
+<p><strong>Configuring the Secure Hash function:</strong>
+    The default hash function is the <code>sha</code>-module (SHA-1). 
+    If you need to use a different function, for instance MD5 (maybe because of backward compatibility with older
+    Snakelet versions, or when you can't or don't want to reset all passwords) you'll have to specify that like this in your webapp init code:
+</p>
+<pre>
+    import md5
+    import snakeserver.user
+    snakeserver.user.securehash=md5
+</pre>
+<p>Note that you must set it to a module or object that has the <code>new()</code> method to create a new hashing object (Python's
+    md5 and sha modules both have this).
+    Also note that this is a <em>global</em> setting that will affect <em>all webapps on the server</em>. 
+    (Even if you set this in the init code of only one of your webapps).
+    The password hash function was changed in Snakelets 1.44 from md5 to sha. If you have passwords on storage created
+    by an older Snakelets version, you will have to reset all passwords. Conversion is impossible, because 
+    the original passwords cannot be reconstructed from the existing md5 hash.
+</p>
+<h3><strong>Authentication methods</strong></h3>
+<p>Snakelets supports browser-based HTTP authentication (you know, where the browser shows a username/password dialog). Use the 'httpbasic' or 'httpdigest' method for this. You can also use a login page to do the authentication ('loginpage' method). If user authentication is required (because the session type is 'user', or there is an authorizedRole defined for the page), Snakelets will start using the configured authentication method to validate the user. The following methods are available:</p>
+<ul>
+  <li><strong>httpbasic</strong> [argument: realm name] - basic HTTP authentication, browser shows a username/password dialog. Passwords are sent unencoded over the network.</li>
+  <li><strong>httpdigest</strong> [argument: realm name] - <em>NOT YET SUPPORTED</em> digest HTTP authentication, browser shows a username/password dialog. This is a secure method: passwords are <em>not</em> sent over the network.</li>
+  <li><strong>loginpage</strong> [argument: login page url] - authentication using a login web page form. Passwords are sent unencoded over the network (because there's no HTTPS support yet...)</li>
+</ul>
+<p>How to specify the method to use?</p>
+<ul>
+  <li>in Ypage: use the <code>&lt;%@authmethod=method;argument%&gt;</code> declaration.</li>
+  <li>in Snakelet: define a <code>getAuthMethod(self)</code> function that returns a tuple (authmethod, argument).</li>
+  <li>for the whole webapp at once: define a <code>authenticationMethod = (method, argument)</code> attribute in your webapp's init file.</li>
+</ul>
+<h3><strong>Checking the user and Logging in, and out</strong></h3>
+<p>When you use any of the above authentication methods, and the session type is suitable, Snakelets will automatically log in an authenticated user (see above). You won't have to do anything by yourself when using the 'http'-methods, but you will have to do a little extra work if you use 'loginpage'.</p>
+<p>Your login page must have a session (session type may not be 'no'), and a form containing a 'login' and a 'password' input field, and the form's action url should be the login page itself (<code>self.getURL()</code> is handy). Inherit the page from the <code>snakeserver.user.LoginPage</code> baseclass to gain access to the <code>attemptLogin(returnpage)</code> method. Call this method first thing in your login page, and you're set. If the login succeeds, it will redirect you to the return page (you can override this by passing it as argument to the authentication method). If the login fails, your Ypage simply continues. (The <code>attemptLogin</code> method does some trickery to remember the page you must return to after a succesful login!)
+    The login logic looks first for form field values for the 'login' and 'password' form fields, if these are not available
+    it also looks on the request Context object for the same attributes. This is useful to be able to set the login/password
+    by another means than a user form (such as a remember-me-cookie).</p>
+<p><strong>Password check:</strong> If you use one of Snakelet's built-in authentication methods (as described above) you still have to provide a special method in your webapp's init file, that Snakelets will use to check username+password when it needs to:<br />
+&nbsp; <code>def authorizeUser(authmethod, url, username, password, request)</code><br />
+  It must return a <code>snakeserver.user.LoginUser</code> object (or subclass thereof), or a set/sequence of privilege names, or <code>None</code> if the given user+password is not correct. The url parameter is the page that was requested, and the request parameter is the Request object (you can get ip addresses or session information from it, for instance).</p>
+<p><strong>Logging out:</strong> Somewhere in your code you have to logout the user and delete the session associated with it. You must use the <code>logoutUser</code> and <code>deleteSession</code> functions for that, see the next paragraph. Note that when using http authentication it is not possible to truly log a user out; the web browser continues to send the previously accepted credentials, and the user is logged in again at the next request...</p>
+<p><strong>Custom login mechanism:</strong> If you program your own authentication/login mechanism, you won't need any of the stuff described above (no authmethod and so on, because you are programming this yourself). In your custom login code you will need the following methods:</p>
+<ul>
+  <li><code>Session.loginUser(user)</code> - to log in (see <a href=
+    "session.html">Session</a> object)</li>
+  <li><code>Session.logoutUser()</code> - to log out (see <a href=
+    "session.html">Session</a> object)</li>
+  <li><code>Session.getLoggedInUser()</code> - to get the current user (see <a href=
+    "session.html">Session</a> object)</li>
+  <li><code>Request.deleteSession()</code> - to log out and also remove the session (see <a href=
+    "request.html">Request</a> object)</li>
+</ul>
+<p><em>See the 'account' example webapp for a possible implementation of all this. The 'manage' webapp also uses authentication with a login page. In the 'test' webapp is an example of httpbasic authentication.</em></p>
+<h3><strong>Access control using user privileges</strong></h3>
+<p>You can require a user to simply log in using a password, and be done with it, but every authenticated user in Snakelets can also have a set of &quot;roles&quot; (or &quot;privileges&quot;). When creating a User object you can provide a list or set of <em>privileges</em> (usually just strings/names, such as &quot;administrator&quot;, &quot;moderator&quot;...) that are given to this user. You can then grant or deny access to pages based on these privileges. The user object has a property (attribute) <code>privileges</code> that contains a set of the privileges the user has, and some methods to aid checking for privileges: </p>
+<ul>
+  <li><code>hasPrivileges(privs)</code> -- does the user have <em>all</em> of the privileges (list or set)?</li>
+  <li><code>hasAnyPrivilege(privs)</code> -- does the user have one or more of the privileges (list or set)?</li>
+  <li>testing for a single privilege is as simple as <code>if &quot;privilege&quot; in user.privileges: ...</code></li>
+</ul>
+<p>You can set required privileges on several levels:</p>
+<ul>
+  <li>In Ypages, with a page declaration: <code>&lt;%@authorized=role1,role2%&gt;</code> (this requires session='user')</li>
+  <li>In Snakelets, with a method: <code>def getAuthorizedRoles(self): return <em>set-of-privilegenames (or list/tuple)</em></code></li>
+  <li>In WebApp's __init__.py files, define an attribute: <code>authorizationPatterns</code> as a dictionary containing 'fnmatch'-style url patterns (the same as the Snakelet patterns) as keys, with lists of accepted privileges/roles as values. If you use <code>None</code> for the privileges, it means &quot;except this one&quot;; which means that for that specific URL pattern no privileges are required (even if other patterns match).<br />
+    For instance, the following restricts all urls in the webapp starting with &quot;data/accounts/&quot; (relative to the webapps context-root) to logged-in users with a &quot;accountmgr&quot; and/or &quot;controller&quot; privilege. Also .doc-files can only be downloaded by users that are &quot;worduser&quot;, but the &quot;info.doc&quot; is always available to everybody:
+    <pre>
+authorizationPatterns = {
+        &quot;data/accounts/*&quot;: [ &quot;accountmgr&quot;, &quot;controller&quot; ],
+        &quot;*.doc&quot;: [ &quot;worduser&quot; ],
+        &quot;info.doc&quot;: None
+        }
+</pre>
+<p>Note that multiple patterns may match. For instance, with the above example, the file &quot;data/accounts/finance.doc&quot; can only be accessed by somebody who is a 'worduser' <em>and</em> one or both of 'accountmanager' and 'controller'.</p>
+<p>Be careful with patterns; a pattern such as &quot;*&quot; matches for <em>all</em> urls in the webapp. This includes static files such as .css style sheets!</p>
+<p>Snakelets automatically appends the *-wildcard to the end of all patterns to avoid security holes.
+The server-wide url prefix is automatically prepended to your patterns, so your patterns are relative to the webapp root.</p>
+<p>Smart suffixes are taken into account when checking authorization patterns. This means that if you have a pattern &quot;admin.y&quot;,
+    the url without the suffix (&quot;admin&quot;) will <em>also</em> be protected (because smart suffixes would add .y automatically to this url!)
+The other way around: if you have a pattern &quot;admin&quot; (without suffix), urls of the form &quot;admin.y&quot;, &quot;admin.sn&quot;
+etc. will also be protected, because of the automatic appending of the '*'-wildcard.</p>
+  </li>
+</ul>
+<h3>'Not authorized' message </h3>
+<p>When you're not authorized to view a page, you'll get a HTTP 403 error page 'You don't have the required privileges to access this page' (or a similar message).</p>
+
+<h3>Accessing the user object</h3>
+<p>You can get the currently logged in user from the <a href="session.html">Session object</a>, using something like:
+<code>req.getSession().getLoggedInUser()</code>
+or, when in an <a href="ypage.html">Ypage</a>, using the shortcut object:
+<code>self.User</code>.
+You will get the currently logged-in user object, or <code>None</code> when nobody is logged in.
+</p>
+<h3>Shared authentication and Single signon</h3>
+<p>With the help of the &quot;<strong>SharedAuth</strong>&quot; plugin (available separately in the Plugins package; this function is not available by default) it is possible
+to do <em>shared authentication </em>(share a single authentication method over multiple webapps).    This means that if you have some central user administration datastore, you only
+        have to program an authentication method in <em>one</em> webapp that uses this datastore
+        to authenticate users. It can then register other webapps to be allowed to 'share' the authentication method.
+        Now the other webapps can ask the SharedAuth plugin to do the authentication for them,
+    and it will use the authentication method of the first webapp. For more information on how to do this, see the source code of the SharedAuth plugin.</p>
+<p>Single singon is different: this means that a user only logs in on one webapp, and other webapps will now share this login information, so that the user doesn't have to log in for each webapp. The latter is the normal behavior, because every webapp has its own session (for security and containment). By setting the sharedSession config item to True (default is False), you can tell the server to use the <em>global shared session. </em>Every webapp that has this on True will not use its own session, but instead share a single global session, and so they share the session object, the session user information, and the session context. Because it may be dangerous, Snakelets prints a warning when starting up when it detects that a webapp uses the shared session. There are several things that are important:</p>
+<ol>
+  <li>Because the session context is shared, all items that are placed on it are also shared. Check for conflicting items! Webapps will overwrite eachothers attributes if you don't use different names.</li>
+  <li> The user object is also shared. If you're using only <code>LoginUser</code> objects, you're safe, but if you are using your own subclassed User object with custom methods or properties, you may be in trouble, unless every webapp that shares the global session knows about this and sets the correct user object. It's probably better to define a User class that is then also shared across all your webapps that have a shared session. </li>
+  <li>Logging out in one webapp means that the user is logged out in all other webapps with shared session too (this is to be expected, because logging in does the same!). </li>
+  <li>A shared session is only shared on a single virtual host. The same webapps but on a different vhost will <em>not</em> share the session from another vhost.</li>
+  <li><em>Note: </em>shared session does <em>NOT</em> mean that different <em>users</em> share a session. Every user ofcourse has her own private session!</li>
+</ol>
+<p> The 'shared1' and 'shared2' example webapps show how you can use the shared session to achieve single signon. </p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

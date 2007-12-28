@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Snakelet</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Snakelet class</h2>
+<p>Your own snakelets have to subclass from the generic Snakelet class and thus inherit all methods from that class. You can use the following methods of the Snakelet base class:</p>
+<table summary="Snakelet class methods">
+  <tbody>
+    <tr>
+      <th>Method</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>serve(request, response)</td>
+      <td>must override this to handle requests, the parameters are the <a href="request.html">request</a> and <a href="response.html">response</a> objects.</td>
+    </tr>
+    <tr>
+      <td>getWebApp()</td>
+      <td>the current <a href="webapp.html">WebApp</a> object. Contains additional interesting methods.</td>
+    </tr>
+    <tr>
+      <td>getContext()</td>
+      <td>snakelet context (ContextContainer object). Scope: snakelet. <em>shared for all users/requests</em></td>
+    </tr>
+    <tr>
+      <td>getAppContext()</td>
+      <td>webapp context (ContextContainer object). Scope: web app. <em>shared for all users/requests</em></td>
+    </tr>
+    <tr>
+      <td>getPlugin(pluginname)</td>
+      <td>look up the (running) plugin object by its name (raises <code>KeyError</code> if not found)</td>
+    </tr>
+    <tr>
+      <td>getPluginNames()</td>
+      <td>a list of names of the installed plugins</td>
+    </tr>
+    <tr>
+      <td>getFullURL()</td>
+      <td>returns full URL of this snakelet (without query args). <em>if you are using URL patterns, this cannot be used in that snakelet! (because the pattern ends up in the URL)</em> Example: &quot;http://desertfish.xs4all.nl:9080/test/snoop.sn&quot; <em>NOTE:</em>The hostname in the url is the virtual-host-name from what Snakelets thinks is the vhost for this request. If you are running Snakelets behind a proxy (and/or the bindname is different), this hostname may not be correct! The solution is to enable the Vhost config and to define a correct virtual-host mapping for the 'real' hostname. You can still use a different bindname, if you wish.</td>
+    </tr>
+    <tr>
+      <td>getURL()</td>
+      <td>server-relative URL pattern of this snakelet or Ypage, example: &quot;/test/snoop.sn&quot; If you use a URL pattern for your snakelet, that pattern is returned (example: &quot;/test/*.pdf&quot;)! So it is <em>not</em> safe to use this method for constructing URLs. Use the getRequestURLplain method of the <code>request</code> object instead! If you are not using URL patterns, you're safe.
+          <br/>For Ypages with a form this is useful if the form should be posted to the page itself, you can then easily do <code>&lt;form action=&quot;&lt;%=self.getURL()%&gt;&quot; .... &gt;</code></td>
+    </tr>
+    <tr>
+      <td>init()</td>
+      <td>override this to perform custom initialization at load time</td>
+    </tr>
+    <tr>
+      <td>getDescription()</td>
+      <td>override to return a description string for the snakelet</td>
+    </tr>
+    <tr>
+      <td>requiresSession()</td>
+      <td>override this to return one of the special SESSION_* values defined in the Snakelet class (for instance <code>return self.SESSION_WANTED</code>), that signify what kind of session is required. Also see the session Ypage-declaration below. The possible values are: SESSION_NOT_NEEDED (no session and session cookie), SESSION_WANTED (use session and session cookie), SESSION_REQUIRED (requires a synchronised session), SESSION_LOGIN_REQUIRED (requires a session with a logged in user), SESSION_DONTCREATE (use existing session, if available, if not: do NOT create a new session). If you use the last one and you do not provide a means of user-authentication (see <code>getAuthMethod</code> below), Snakelets will return a 403-error page when you try to access the page if you are not logged in.</td>
+    </tr>
+    <tr>
+      <td>getAuthorizedRoles()</td>
+      <td>override this to return a list or set of privilige names that are allowed to access this snakelet. Default is None (no access control).</td>
+    </tr>
+    <tr>
+      <td>getAuthMethod()</td>
+      <td>override this to return a tuple (method,argument) that defines the authentication method to use for this snakelet. See <a href=
+        "authorization.html">authorization</a>.</td>
+    </tr>
+    <tr>
+      <td>allowCaching()</td>
+      <td>override this to return True if the browser is allowed to cache the page, False otherwise. Default is False.</td>
+    </tr>
+    <tr>
+      <td>escape(str)</td>
+      <td>escapes a string to make it HTML-safe (&lt; becomes &amp;lt; etc)</td>
+    </tr>
+    <tr>
+      <td>urlescape(str)</td>
+      <td>escapes a string to make it URL-safe (spaces become '+', ? and &amp; are translated etc). Don't use this on full URLs with URL query args, because it
+        escapes the characters that must be there to separate the args. It is intended for the <em>value strings</em> for those args.
+        </td>
+    </tr>
+    <tr>
+      <td>urlunescape(str)</td>
+      <td>un-escapes an url-escaped string. Only use this for URL component strings, not on whole URLs!</td>
+    </tr>
+    <tr>
+      <td>redirect(URL, request, response)</td>
+      <td>internal redirect to anoter URL ( &quot;http://..../..&quot; or &quot;/webapp/page.y&quot; ) Note: new URL query args are NOT parsed!</td>
+    </tr>
+    <tr>
+      <td>include(URL, request, response)</td>
+      <td>internal include of another URL ( &quot;http://..../...&quot; or &quot;/webapp/page.y&quot; ) Note: new URL query args are NOT parsed!
+      <em>Note: the current implementation is broken and doesn't process multi-level includes correctly. Also the content-type of the page will be wrong when using page include.</em>
+	</td>
+    </tr>
+    <tr>
+      <td>getErrorPage()</td>
+      <td>the URL of the currently defined custom error page, or None.</td>
+    </tr>
+    <tr>
+      <td>setErrorPage(URL)</td>
+      <td>set a custom error page (URL string) that must be shown -instead of the faulty page- when an unhandled exception occurs in this snakelet. See <a href=
+        "ypage.html">the &quot;errorpage&quot; declaration </a>for more details on the data available to you in your custom error page.</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Getting the URL prefixes, easy URL creation</h3>
+<p>In Ypages you have some shortcuts to easily obtain the current URL prefix and so on.
+From a Snakelet, you can do exactly that but not directly: you have to get the <a href="webapp.html">webapp</a> first
+using <code>getWebApp()</code> and use its methods instead. The webapp object also has two convenient methods to create urls: <code>mkUrl</code> and <code>mkAssetUrl</code>!</p>
+
+<h3><strong>Using <code>self</code> in Snakelets to store data</strong></h3>
+<p> Short: <em>you shouldn't.</em> Long: your Snakelet code has no single, local, 'personal', environment it is running in. There is only one object (instance) of your Snakelet and it might be accessed concurrently by multiple threads. <em>Only</em> use local objects to store temporary data in, never create new properties on <code>self</code>! If you really need to store some data that is local for this Snakelet, and shared for all users and all requests, you can use the <code>getContext()</code> method to obtain the local Snakelet data context.</p>
+
+<h3><strong>Making a download snakelet that serves static file content</strong></h3>
+<p>Use <code>self.getWebApp().serveStaticFile(filename, response, useResponseHeaders=False)</code> to utilize
+the server's own internal code to serve static files efficiently. See the 
+<a href="webapp.html">webapp</a> chapter.</p>
+
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

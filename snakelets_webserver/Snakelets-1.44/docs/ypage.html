@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - YPage dynamic pages</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>YPage dynamic pages</h2>
+<p>The Ypage language is as follows: HTML with embedded control structures. You can create these files in any character encoding that:</p>
+    <ul>
+        <li>is <em>not</em> multi-byte such as MBCS or UTF-16 (where every character takes more than 1 byte)</li>
+        <li>has the normal ASCII characters in the lower 127 chars.</li>
+    </ul>
+<p>ISO-8859-1, ISO-8859-15 and UTF-8 are excellent examples. (also see the <em>inputencoding</em> declaration below).</p>
+<table summary="Ypage control structures">
+  <tbody>
+    <tr>
+      <th>control structure</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>&lt;%@name=value%&gt;</td>
+      <td>declaration for this page, see below</td>
+    </tr>
+    <tr>
+      <td>&lt;%!-- blah --%&gt;</td>
+      <td>Ypage comment, these are ignored by the Ypage compiler, so you can use them to add explanations in your Ypage source if you want.</td>
+    </tr>
+    <tr>
+      <td>&lt;%$instruction=args%&gt;</td>
+      <td>page processing instruction, see below</td>
+    </tr>
+    <tr>
+      <td>&lt;%=....%&gt;</td>
+      <td>python expression (will be converted to a string), for example: <code>&lt;%=time.ctime()%&gt;</code></td>
+    </tr>
+    <tr>
+      <td>&lt;%....python code....<br />
+        ....<br />
+        ....end of code...%&gt;</td>
+      <td>embedded python script (extra indenting will be stripped). Be careful here. The indentation style of your embedded code must match the style that is used by the Ypage compiler (set it using the <code>indent</code> declaration).</td>
+    </tr>
+    <tr>
+      <td>&lt;%if ... : %&gt;</td>
+      <td>python script block (ends with ':' so starts new block) Note: might not produce wat you want when you're using nested if statements</td>
+    </tr>
+    <tr>
+      <td>&lt;%end%&gt;</td>
+      <td> ends a python script block. Note: ends ALL nested ifs and loops!<br />
+        If you want to do nested ifs/loops, you have to do it like this (because Snakelets can't guess your loop nesting level):
+        <pre>
+&lt;%for i ...:%&gt;
+    &lt;%for j ...:%&gt;
+        in j loop
+    &lt;%end%&gt;
+    still in i loop
+&lt;%end%&gt;</pre></td>
+    </tr>
+    <tr>
+      <td>&lt;%if ... : %&gt;<br />
+        ...<br />
+&lt;%elif ... : %&gt;<br />
+        ...<br />
+&lt;%else : %&gt;<br />
+        ...<br />
+&lt;%end%&gt;</td>
+      <td> if..elif..else..end block, note the END of the block! Note: might not produce wat you want when you're using nested if statements, such as those below.
+        <pre>
+&lt;%if a:<br />    if b:%&gt;<br />        Text here<br />&lt;%end%&gt;
+</pre>
+        The end statemend ends ALL ifs and loops! See above on how you must create those nested ifs and loops. </td>
+    </tr>
+    <tr>
+      <td>&lt;%for x in range(10):<br />
+        thing.dostuff(x) \%&gt;<br />
+        ...<br />
+        ...<br />
+&lt;%end%&gt;</td>
+      <td>manual block started by using \%&gt;, when script block doesn't end with ':'. Be careful here. The indentation style of your embedded code must match the style that is used by the Ypage compiler (you may need to set it using the <code>indent</code> declaration), otherwise you'll get SyntaxErrors.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">&lt;%<br />
+        def func(arg):<br />
+&nbsp;&nbsp; return 'something is '+arg<br />
+        %&gt;<br />
+        ...<br />
+&lt;%=func('going on')%&gt;</td>
+      <td>Because Python supports nested scopes, it is perfectly possible to define your own methods (functions) inside a script block. You call them in the normal way, do not use a <code>self.</code> prefix, because they aren't class methods.</td>
+    </tr>
+  </tbody>
+</table>
+<h3><strong>Recognised page declarations</strong></h3>
+<p><strong> (must be at the top of your Ypage file): (case-insensitive)</strong></p>
+<table summary="Ypage declarations">
+  <tbody>
+    <tr>
+      <td class="nowrap">&lt;%@import=import cgi,os%&gt;<br />
+&lt;%@import=from os import path%&gt;</td>
+      <td>page-wide imports that will be done only once when your page is constructed</td>
+    </tr>
+    <tr>
+      <td>&lt;%@session=yes|no|valid|user|dontcreate%&gt;</td>
+      <td>does this page need a session? (no=no, yes=session is created if it's not there yet, valid=session must be synchronised with the browser (i.e. browser is actually using this session, it is not new), user=also requires that a user is logged in, dontcreate=use existing session, if not available do NOT create a new one). Default=yes.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@authorized=role1,role2%&gt;</td>
+      <td>define that this page can only be accessed when there's a user logged in (session=user is implied!) and that this user has one or more of the given privileges/roles. See <a href=
+        "authorization.html">authorization</a>.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@authmethod=method;argument%&gt;</td>
+      <td>define the authentication method to use for this page. See <a href=
+        "authorization.html">authorization</a>.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@gobblews=yes|no%&gt;</td>
+      <td>remove unnecessary whitespace in the output? This is whitespace between declarations, script tags, etc. (default=yes) Snakelets is usually smart enough with stripping unnecessary whitespace, but when you really need it to appear in the output, use this option. (For instance, when not creating HTML documents)</td>
+    </tr>
+    <tr>
+      <td>&lt;%@outputencoding=...%&gt;</td>
+      <td>specify the output character encoding, like UTF-8 or ISO-8859-1. If you don't specify this, Python's default
+        output encoding is used (usually ASCII) but beware that this will very likely break pages that try to use non-ASCII characters.
+        If you want to be safe and support Unicode output, you should define a page output encoding. 
+        This declaration is also valid in a page template, but for a change in this decl in a template to become active, you also have to recompile the actual ypage(s) that use the template.
+        Also see the global &quot;defaultOutputEncoding&quot; variable in <a href="creating.html">webapp creation</a>.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@inputencoding=...%&gt;</td>
+      <td>specify the input char encoding (in which your Ypage source has been saved), like UTF-8 or windows-1252 or ISO-8859-1, if different from Python's default encoding. NOTE: This declaration must be present in the first 10 lines of your file, otherwise it won't be recognised.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@contenttype=...%&gt;</td>
+      <td>specify the Content-Type of this Ypage (default: &quot;text/html&quot;) Also valid in a page template, but for a change in this decl in a template to become active, you also have to recompile the actual ypage(s) that use the template.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@disposition=...%&gt;</td>
+      <td>specify the Content-Disposition (RFC 2183) of this Ypage; you can control downloads with this. For example: &lt;%@disposition=attachment; filename=&quot;foobar.txt&quot;%&gt;</td>
+    </tr>
+    <tr>
+      <td>&lt;%@allowcaching=yes|no%&gt;</td>
+      <td>allow the page to be cached <em>by the browser or by proxies?</em> Sets certain HTTP headers. (default=no; dynamic pages are not cached)</td>
+    </tr>
+    <tr>
+      <td>&lt;%@indent=4spaces|8spaces|tabs%&gt;</td>
+      <td>specify the way the compiled Ypage code should be indented, this must match your embedded python indenting style. Default is TABS. If you get weird syntax errors in your Ypages, you should check this setting!</td>
+    </tr>
+    <tr>
+      <td valign="top">&lt;%@errorpage=&quot;url&quot;%&gt;</td>
+      <td> Declare that the specified URL must be used as an error page, in case an unhandled exception occurs. You'd better make sure that the error page itself can be processed without errors ;-) (if it doesn't, Snakelets will show *that* error instead)
+      <p>No output of the faulty page will be displayed, it will be replaced by the error page.</p>
+        <p>The error page can access the error details trough various members on the RequestContext object: (also see sys.exc_info() )<br />
+ctx.Exception_page -- url of the page that caused the error (string)<br />
+ctx.Exception -- the exception object itself<br />
+ctx.Exception_type -- the type of the exception<br />
+ctx.Exception_value -- value of the exception<br />
+ctx.Exception_tb -- traceback object</p>
+        <p>This declaration also works from a page template (so you can set the error page once, it is then used for all pages that use the template). This is similar to setting the <code>defaultErrorPage</code> config item in the webapp init file.</p></td>
+    </tr>
+    <tr>
+      <td>&lt;%@inherit=BaseClass1,BaseClass2...%&gt;</td>
+      <td>Specify one or more base classes that this Ypage should inherit from. The default base class is <code>snakeserver.YpageEngine.Ypage</code>. If you have not imported the base class using an explicit import declaration, it is assumed that it can be found in a python module with the same name as the class. If you use packages in your inherit declaration (for instance pageutils.PageBase) it means that Snakelets will try to load the PageBase class from the pageutils module.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@pagemethod=methodname%&gt;</td>
+      <td>Specify other name for the HTML generation method (default: 'create') Useful in combination with the inherit declaration, when you want a base class to handle it and call your own method in this derived page class.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@method=methodName(self, args...):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;...method body statements... <br />
+%&gt;</td>
+      <td>Use this to define a new method on the <em>page class level</em> (i.e. outside the normal
+        page code method scope). That's why the <code>self</code> parameter is required; you're defining
+        a class method here (not a regular function). A few method names are reserved, and should not be used, most notably
+        <code>create</code>, the methods defined on the <a href="snakelet.html">Snakelet</a> class,
+        and the internal Ypage methods (for details, see below at 'YPage class methods', or refer to the YpageEngine.py source file).
+        This is an advanced feature that you rarely need, except when you need dynamic template args. See below at 'YPage Templates'.
+        </td>
+    </tr>
+    <tr>
+      <td>&lt;%@pagetemplate=&quot;templatepage.y&quot;%&gt;<br />
+&lt;%@pagetemplate=&quot;tpl.y?arg1=foo&amp;arg2=bar&quot;%&gt;</td>
+      <td>Specify the template to use (see below). Use a template path that is relative to the webapp's root. If it's empty or 'none': disables the default page template. It's possible to add url-escaped parameters that will be accessible from inside the page template, see below.</td>
+    </tr>
+    <tr>
+      <td>&lt;%@pagetemplatearg=paramname=the parameter value%&gt;</td>
+      <td>Specify a parameter ('paramname') that will be accessible from inside the page template, see below. You can repeat this to add more parameters. This declaration is useful when you have a default page template, instead of separate explicit pagetemplate declarations.</td>
+    </tr>
+  </tbody>
+</table>
+<h3><strong>Recognised processing instructions:</strong></h3>
+<table summary="Ypage processing instructions">
+  <tbody>
+    <tr>
+      <td>&lt;%$include=&quot;file&quot;%&gt;</td>
+      <td>includes the contents of the <em>file</em> inside the current Ypage (parses the file as an Ypage!) Inclusion is done once, at compile time. This means that you can include .y or .html pages, but NOT directory listing urls or snakelets urls. The &quot;file&quot; must be relative to the page you're in, for instance &quot;../footer.y&quot; Note that you cannot provide URL query args!</td>
+    </tr>
+    <tr>
+      <td>&lt;%$call=&quot;url&quot;%&gt;</td>
+      <td>calls another url at this point in the Ypage <em>when it is displayed</em>, and includes the result in the output. The url can be anything (snakelet, ypage or .html etc, or even a directory listing-path), relative to the page (&quot;../footer.sn&quot;) or absolute (&quot;http://www.cnn.com&quot;). The document at the given url is retrieved and inserted every time the page is displayed! If the URL is relative to the page or starts with a '/', it is assumed that it is an internal URL and it is handled within Snakelets. Other (external) URLs are retrieved with an expensive second HTTP request. Note that you <em>can</em> provide URL query args!      <em>Note: the current implementation is broken and doesn't process multi-level includes correctly. Also the content-type of the page will be wrong when using page include.</em>
+
+      </td>
+    </tr>
+    <tr>
+      <td>&lt;%$redirect=&quot;url&quot;%&gt;</td>
+      <td>Stops processing the page and directly -at ypage runtime- redirects the current processing to another URL. ( &quot;http://..../...&quot; or &quot;/webapp/page.y&quot; ) Note that you can not provide URL query args!</td>
+    </tr>
+    <tr>
+      <td>&lt;%$httpredirect=&quot;url&quot;%&gt;</td>
+      <td>Stops processing the page and directly -at ypage runtime- sends a HTTP 302 redirect to the client, to let it load another URL. ( &quot;http://..../...&quot; or &quot;/webapp/page.y&quot; ) Note that you <em>can</em> provide URL query args!</td>
+    </tr>
+    <tr>
+      <td>&lt;%$insertpagebody%&gt;</td>
+      <td>Inserts the actual page here inside the template (see below)</td>
+    </tr>
+  </tbody>
+</table>
+<h3><strong>YPage Templates</strong></h3>
+<p> You can assign a template to your Ypages. Templates may contain page content that is used on multiple pages to define common elements such as a menu. Using a template, you only have to define the menu once. Templating doesn't work for snakelets: if you want to use page templates for snakelet output, you have to write an Ypage instead and redirect to that ypage from within your snakelet.</p>
+<p> When you use the pagetemplate declaration you tell Snakelets to use that template Ypage instead of just running the current Ypage. Instead, the current Ypage will be embedded in the template page. Using the insertpagebody processing instruction you tell the engine where exactly to put the actual page inside the template. If you're using a default page template (webapp config), every Ypage that has no explicit pagetemplate declaration will be templated with the specified default template. To disable a default template, use a pagetemplate declaration with an empty value or 'none'.</p>
+<p> Output encodings: the output encoding of the template page is ignored. The output encoding specified by the actual page is used instead! (input encodings work normally ofcourse: your template can be written as UTF-8 file while the pages itself can be ASCII).</p>
+<p> <strong>Template page parameters:</strong> You can add url-escaped parameters to the template page declaration, like: <code>?arg1=foo&amp;arg2=bar</code> (or use the separate pagetemplatearg declaration, which might be much easier because the values don't have to be url-escaped). These parameters will be available from inside your template page code as <code>self.PageArgs</code> (a dict, like: <code>{'arg1':'foo', 'arg2':'bar'}</code>).</p>
+<p><strong>Dynamic template page parameters using special page method:</strong> There is a special reserved page method name, <code>templateArgs</code>,
+that is used to dynamically determine the values in the <code>PageArgs</code> dict. When you define it, like this:</p>
+<pre>&lt;%@method=templateArgs(self, request):
+    return { .... }
+%&gt;
+</pre>
+<p>it will be called for each page load (with the current Request object as a parameter, so that you can use that info too if you need it,
+for instance the session object, the user, etc)
+and the dict that it creates returns is added to <code>PageArgs</code>.
+If you need this, you must define this method in the templated page, not in the template itself (it's no use there...)
+    </p>
+<h3><strong>YPage class methods</strong></h3>
+<p> A compiled Ypage inherits from Snakelet, <strong>so you have access to all methods from a <a href="snakelet.html">snakelet</a></strong>. Also, some additional methods and attributes are defined:</p>
+<table summary="Ypage class methods">
+  <tbody>
+    <tr>
+      <th>Ypage method/attribute</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>self.write(object)</td>
+      <td>writes the str(object) to the page. This avoids things like: ...%&gt;&lt;%=object%&gt;&lt;%...</td>
+    </tr>
+    <tr>
+      <td>self.sendError(code, message=None)</td>
+      <td>send HTTP error with specified HTTP error code (int) and message (string) (page is aborted)</td>
+    </tr>
+    <tr>
+      <td>self.setCookie(.....)</td>
+      <td>set a new cookie. See the same method from the <a href="response.html">Response</a> for details.</td>
+    </tr>
+    <tr>
+      <td>self.delCookie(.....)</td>
+      <td>delete a cookie on the web browser. See the same method from the <a href="response.html">Response</a> for details.</td>
+    </tr>
+    <tr>
+      <td>self.getCookies()</td>
+      <td>return the cookies set on the <a href="response.html">Response</a> (usually you'll want to get them from the request: <code>self.Request.getCookies()</code> because that are the cookies that the browser sent to us)</td>
+    </tr>
+    <tr>
+      <td>self.guessMimeType(filename)</td>
+      <td>Guess the mimetype for the file. See the same method from the <a href="response.html">Response</a> for details.</td>
+    </tr>
+    <tr>
+      <td>self.setContentType(mimetype)</td>
+      <td>Set the content-type of the result page. See the same method from the <a href="response.html">Response</a> for details. Usually it is enough to use the &lt;%@contenttype=...%&gt; declaration, but if you need to set the content-type dynamically, you must use this method.</td>
+    </tr>
+    <tr>
+      <td>self.setHeader(header, value)</td>
+      <td>Set a custom HTTP response header. See the same method from the <a href="response.html">Response</a> for details.</td>
+    </tr>
+    <tr>
+      <td>self.getHeader(header)</td>
+      <td>get a previously set HTTP header. See the same method from the <a href="response.html">Response</a> for details.</td>
+    </tr>
+    <tr>
+      <td>self.abort(msg='')</td>
+      <td>stops page processing immediately. msg is optional. (the msg will be shown as the last thing on the page)</td>
+    </tr>
+    <tr>
+      <td>self.Request</td>
+      <td>the snakelet request object</td>
+    </tr>
+    <tr>
+      <td>self.RequestCtx</td>
+      <td>the request's context (scope: request) unique per user and per request, destroyed after request completes</td>
+    </tr>
+    <tr>
+      <td>self.SessionCtx</td>
+      <td>the session context (None when there is no session) <em>unique per user, shared for all requests of this user</em></td>
+    </tr>
+    <tr>
+      <td>self.ApplicationCtx</td>
+      <td>the web application's context (scope: web application) <em>shared for all users/requests</em></td>
+    </tr>
+    <tr>
+      <td>self.WebApp</td>
+      <td>the Web App itself</td>
+    </tr>
+    <tr>
+      <td>self.User</td>
+      <td>the logged in user object (None when no user is logged in or when no session is present)</td>
+    </tr>
+    <tr>
+      <td>self.URLprefix</td>
+      <td>the URL base for the current webapp (same as self.WebApp.getURLprefix() ) This is often used to create correct links in Ypages. However, it's easier to use the <code>url()</code> function instead, see below.</td>
+    </tr>
+    <tr>
+      <td>self.Assetprefix</td>
+      <td>the URL base for the static assets of this webapp. Can be used to create correct links to static files such as images. However, it's easier to use the <code>asset()</code> function instead, see below.</td>
+    </tr>
+    <tr>
+      <td>self.PageArgs</td>
+      <td>A dict of the (optional) template page arguments. Only available inside the code of a template page.</td>
+    </tr>
+    <tr>
+      <td><br /></td>
+      <td><br /></td>
+    </tr>
+    <tr>
+      <td>self.Ycall(URL)</td>
+      <td>to easily do a &lt;%$call=&quot;url&quot;%&gt; from your embedded code. This is similar to the Snakelet's <code>include</code> method. 
+      <em>Note: the current implementation is broken and doesn't process multi-level includes correctly. Also the content-type of the page will be wrong when using page include.</em>
+      </td>
+    </tr>
+    <tr>
+      <td>self.Yredirect(URL)</td>
+      <td>to easily do a &lt;%$redirect=&quot;url&quot;%&gt; from your embedded code. This is similar to the Snakelet's <code>redirect</code> method.</td>
+    </tr>
+    <tr>
+      <td>self.Yhttpredirect(URL)</td>
+      <td>to easily do a &lt;%$httpredirect=&quot;url&quot;%&gt; from your embedded code. This is similar to the Response's <code>HTTPredirect</code> method.</td>
+    </tr>
+    <tr>
+        <td>url(path)</td>
+        <td>create a correct URL based on the URLprefix. Example: &lt;%=url('main.y')%&gt;
+            <br/>(this is a shortcut to the <code>mkUrl</code> method of the webapp.
+            <a href="webapp.html">Look there</a> for more details and options)</td>
+    </tr>
+    <tr>
+        <td>asset(path)</td>
+        <td>create a correct URL for the static asset (images, files etc) based on the Assetprefix. Example: &lt;%=asset('logo.jpg')%&gt;
+            <br/>(this is a shortcut to the <code>mkAssetUrl</code> method of the webapp.
+            <a href="webapp.html">Look there</a> for more details and options)</td>
+    </tr>
+  </tbody>
+</table>
+<h3><strong>Using <code>self</code> in Ypages to store data</strong></h3>
+<p> Short: <em>you shouldn't.</em> Long: just like Snakelets, your Ypage code has no single, local, 'personal', environment it is running in. Your Ypage <em>may</em> be accessed concurrently by multiple threads (though in the current implementation, this is not so-- but don't count on this!) <em>Only</em> use local objects to store temporary data in, never create new properties on <code>self</code>! What you probably want to do is to use the request context object (<code>self.RequestCtx</code>) to put values on - that is safe and only lasts for the duration of the request.</p>
+<h3><strong>Deleting the Session</strong></h3>
+<p> If you want to delete the session, use: self.Request.deleteSession() From within the Ypage, you have no access to the Response object. Every sensible action with the response can be done with page declarations.</p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

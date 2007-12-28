@@ -1,0 +1,33 @@
+body {
+	font-family: "Trebuchet MS", serif;
+	font-size: small;
+	background-color: #F0F0EE;
+	color: black;
+}
+pre,code {
+	font-family: "Bitstream Vera Sans Mono", monospace;
+	font-size: small;
+}
+table {
+	border: solid gray 1px;
+	border-collapse: collapse;
+}
+tr,td,th {
+	padding: 1ex;
+	border: solid gray 1px;
+	vertical-align: top;
+}
+td.nowrap {
+	white-space: nowrap;
+}
+th {
+	font-weight: bold;
+	text-align: center;
+	border: none;
+}
+address {
+	border-top: 1px dotted gray;
+	width: 60%;
+	font-style: italic;
+	margin-top: 3em;
+}

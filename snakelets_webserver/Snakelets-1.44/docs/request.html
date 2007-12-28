@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Request</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Request Object</h2>
+<p>Your snakelet gets the current request and response objects in the serve method, and you can do lots of stuff with them: </p>
+<p><strong>Scope: request</strong></p>
+<table summary="Request class methods">
+  <tbody>
+    <tr>
+      <th>Method</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>getServerSoftware()</td>
+      <td>server software version (string)</td>
+    </tr>
+    <tr>
+      <td>getSnakeletsVersion()</td>
+      <td>snakelets version (string)</td>
+    </tr>
+    <tr>
+      <td>getServerIP()</td>
+      <td>server IP address (string). Don't use it in an URL, this screws up the virtual hosting feature.</td>
+    </tr>
+    <tr>
+      <td>getServerName()</td>
+      <td>published server hostname (string). Taken from the current virtualhost that handles the request. Which can be different from the webapp's owning vhost, because of vhost aliasing. This server name is safe to use in URLs, the virtual hosting will work nicely.</td>
+    </tr>
+    <tr>
+      <td>getRealServerName()</td>
+      <td>real (internal) server hostname (string)</td>
+    </tr>
+    <tr>
+      <td>getServerProtocol()</td>
+      <td>supported HTTP level (string, &quot;HTTP/1.0&quot;)</td>
+    </tr>
+    <tr>
+      <td>getServerPort()</td>
+      <td>socket port of the server (int)</td>
+    </tr>
+    <tr>
+      <td>getRequestURL()</td>
+      <td>the original full request URL (without hostname and port), for example: &quot;/page/test.cgi?arg=34&quot; Use with the getBaseURL method to obtain a complete URL.</td>
+    </tr>
+    <tr>
+      <td>getRequestURLplain()</td>
+      <td>like getRequestURL, but also without any query args. Use with the next method (getBaseURL) to obtain a complete URL without query args.</td>
+    </tr>
+    <tr>
+      <td>getBaseURL()</td>
+      <td>the base URL of the server. Example: &quot;http://desertfish.xs4all.nl:9080&quot;</td>
+    </tr>
+    <tr>
+      <td>getPathInfo()</td>
+      <td>any additional URL path components after the snakelet URL. Example: when url is 'snoop.sn/foo/bar?arg=value', it returns &quot;/foo/bar&quot;. (Note: this is always empty when you use a fnmatch URL pattern for your snakelet!) (this string is <em>not</em> url-escaped)</td>
+    </tr>
+    <tr>
+      <td>getMethod()</td>
+      <td>the HTTP method used (&quot;GET&quot; or &quot;POST&quot;)</td>
+    </tr>
+    <tr>
+      <td>getQuery()</td>
+      <td>the query args of the URL, example: &quot;arg=value&amp;name=foo%21&quot;. (this string <em>is still</em> url-escaped)</td>
+    </tr>
+    <tr>
+      <td>getFullQueryArgs()</td>
+      <td>all the query args including path info and command, example: &quot;/zip/zap?delete&amp;arg=value&amp;name=foo%21&quot; (note: this is not the full URL! You can get that one from the Snakelet) (this string <em>is still</em> url-escaped)</td>
+    </tr>
+    <tr>
+      <td>getRemoteHost()</td>
+      <td>hostname of the remote host (string)</td>
+    </tr>
+    <tr>
+      <td>getRemoteAddr()</td>
+      <td>IP address of the remote host (string)</td>
+    </tr>
+    <tr>
+      <td>getRealRemoteAddr()</td>
+      <td>the 'real' IP address of the remote host (use this if you are running via Apache Proxy module)</td>
+    </tr>
+    <tr>
+      <td>getContentType()</td>
+      <td>the content-type of the request (string)</td>
+    </tr>
+    <tr>
+      <td>getContentLength()</td>
+      <td>content length of the request (int)</td>
+    </tr>
+    <tr>
+      <td>getUserAgent()</td>
+      <td>browser ID string of the client's browser, or '' (empty string)</td>
+    </tr>
+    <tr>
+      <td>getReferer()</td>
+      <td>the referring URL (that is: the url we came from), or '' (empty string)</td>
+    </tr>
+    <tr>
+      <td>getCookie()</td>
+      <td>raw cookie information (comma separated string)</td>
+    </tr>
+    <tr>
+      <td>getCookies()</td>
+      <td>parsed cookies (mycookie.SimpleRequestCookie object, this is a dict, which maps cookie names to a <em>list</em> of string values)</td>
+    </tr>
+    <tr>
+      <td>clearCookies()</td>
+      <td>erases all cookie information from the request (not from the client!)</td>
+    </tr>
+    <tr>
+      <td>getInput()</td>
+      <td>request input stream (socket/file)</td>
+    </tr>
+    <tr>
+      <td>getArg()</td>
+      <td>URL argument. Example: when url=snoop.sn?command&amp;arg=name it returns &quot;command&quot; (this string is <em>not</em> url-escaped)</td>
+    </tr>
+    <tr>
+      <td>setArg(arg)</td>
+      <td>reset the URL argument (getArg() ) to something new.</td>
+    </tr>
+    <tr>
+      <td>getWebApp()</td>
+      <td>the current WebApp object</td>
+    </tr>
+    <tr>
+      <td>getRangeStr()</td>
+      <td>the unparsed string value of the HTTP 'range' header, or '' (empty string).</td>
+    </tr>
+    <tr>
+      <td>getRange()</td>
+      <td>the parsed HTTP 'range' header; a tuple: (from,to)</td>
+    </tr>
+    <tr>
+      <td>getAuth()</td>
+      <td>the HTTP Authorization header value, or '' (empty string).</td>
+    </tr>
+    <tr>
+      <td>getAllHeaders()</td>
+      <td>all HTTP headers (mimetools.Message object)</td>
+    </tr>
+    <tr>
+      <td>getHeader(header)</td>
+      <td>value of specified HTTP header, or None if it isn't present</td>
+    </tr>
+    <tr>
+      <td>getForm()</td>
+      <td>parsed form contents (a dict of {param name: value} ) The form has a utility method <code>urlencode()</code> that returns an url-encoded query args string like &quot;arg=value&amp;foo=bar&quot; for the form's parameters.</td>
+    </tr>
+    <tr>
+      <td>getField(param, default='')</td>
+      <td>value of a single form field parameter (or the provided default value -which is an empty string if not otherwise given- if the parameter doesn't exist)</td>
+    </tr>
+    <tr>
+      <td>getParameter(param, default='')</td>
+      <td>value of a single form field or request context parameter (or the provided default value -which is an empty string if not otherwise given- if the parameter doesn't exist). 
+        The request form is first examined, if it does not contain the required field, the request context is examined for a matching attribute. If it too does not have it, the default is returned.</td>
+    </tr>
+    <tr>
+      <td>getContext()</td>
+      <td>request context (ContextContainer object). Scope: request. <em>unique per user and per request, destroyed after request completes</em></td>
+    </tr>
+    <tr>
+      <td>getSession()</td>
+      <td>the session object (snakeserver.snakelet.Session object), None if there is no session</td>
+    </tr>
+    <tr>
+      <td>deleteSession()</td>
+      <td>logout current user and deletes the session object. Also clears all cookie info on the request (not on the client!)</td>
+    </tr>
+    <tr>
+      <td>getSessionContext()</td>
+      <td>the session context (ContextContainer object). Scope: session. <em>unique per user, shared for all requests of this user.</em> None if there is no session.</td>
+    </tr>
+    <tr>
+      <td>getMaxPOSTsize()</td>
+      <td>the current max size of a POST request (in bytes)</td>
+    </tr>
+    <tr>
+      <td>setMaxPOSTsize(numbytes)</td>
+      <td>set the maximum size in bytes of a POST request (default: 200000=200Kb). If it is larger, the server aborts the connection and the POST request fails, and a FormFileUploadError exception is raised.</td>
+    </tr>
+    <tr>
+      <td>getEncoding()</td>
+      <td>the current request character encoding. None if not specified (means default).</td>
+    </tr>
+    <tr>
+      <td>setEncoding(encoding)</td>
+      <td>forces the request character encoding. This is often necessary to correctly read non-ASCII characters from From Posts. Also note that returned form fields will be unicode objects (instead of regular strings) if you set the encoding.
+        If you try to change the encoding after the request form fields have already been accessed, a ValueError will be raised.
+        Using this method will override a defaultRequestEncoding that may be defined on the webapp.</td>
+    </tr>
+  </tbody>
+</table>
+<p>Getting request parameters is done using <code>getForm()</code>, or <code>getParameter()</code>. You can clear all parameters for the duration of the reqeuest using <code>getForm().clear()</code> (because it is just a dict).
+    If you need to add or modify request parameters from inside your code, you should update the appropriate keys in the dict object
+    that is returned from <code>getForm()</code>.</p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

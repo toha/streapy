@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Context</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>ContextContainer</h2>
+<p>The 'context' that keeps on popping up (Request context, Snakelet context, Session context, Application context) is just a simple holder for any value you like. It is an 'empty' object that you can add your own attributes to, for instance: </p>
+<pre>
+   self.getAppContext().userName = req.getParameter(&quot;userName&quot;)
+</pre>
+<p>And in your pages you can access them easily, for instance: </p>
+<pre>
+   &lt;h1&gt;Hello, &lt;%=ApplicationCtx.userName%&gt;!&lt;/h1&gt;
+</pre>
+<p><strong>You have to use the ContextContainers to store information! It is not a good idea to store your data directly in the Snakelet, Webapp or whatever other objects!</strong> </p>
+<p>TIP: to avoid AttributeError exceptions when you're accessing attributes that have not been defined in the context, you can use getattr with a default parameter:</p>
+<pre>
+   &lt;h1&gt;Hello, &lt;%=getattr(ApplicationCtx,&quot;userName&quot;,&quot;unknown name&quot;)%&gt;!&lt;/h1&gt;
+</pre>
+<p>TIP: the Application context is perfectly suited to store stuff that you want to have access to (from your Ypages/snakelets) during the whole application, such as utility classes or persistent variables. You can do this in the __init__ method of one of your snakelets, for instance. The Session context is very important: you can store stuff here that is associated with the user session (it is unique per user, and is removed when the user is no longer on the site). </p>
+<p>The Request context is volatile and only exists during the processing of a single request. You can put values here that need to be displayed on the target page.</p>
+<p>The Snakelet context is not very useful (its inside a single snakelet, you could use regular class attributes for the same purpose).</p>
+<h2>Server Context (there is none)</h2>
+<p>The WebApp runs inside the server. You cannot access this server. This is due to security restrictions, and most interesting stuff is already accessible trough the other interfaces). Because of this, the 'largest' scope is the web app scope. You cannot exchange information with another web app by using context storage, for example. You <em>can</em> store things on the web app context and read them from other snakelets or Ypages, <em>within the same webapp</em>. </p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

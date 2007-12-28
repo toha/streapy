@@ -1,0 +1,1117 @@
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (10 ms, 1099 lines/sec)
+[2007-11-25 03:12:26,YpageEngine,DEBUG] parsing ypage "webapps.y"... 
+[2007-11-25 03:12:26,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (9 ms, 9600 lines/sec)
+[2007-11-25 03:12:26,YpageEngine,DEBUG] parsing ypage "serverinfo.y"... 
+[2007-11-25 03:12:26,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (20 ms, 4349 lines/sec)
+[2007-11-25 03:12:26,YpageEngine,DEBUG] parsing ypage "webappinfo.y"... 
+[2007-11-25 03:12:26,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (19 ms, 6100 lines/sec)
+[2007-11-25 03:12:26,YpageEngine,DEBUG] parsing ypage "sessions.y"... 
+[2007-11-25 03:12:26,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (10 ms, 5599 lines/sec)
+[2007-11-25 03:12:26,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 03:12:26,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (1 ms, 3000 lines/sec)
+[2007-11-25 03:12:26,YpageEngine,DEBUG] parsing ypage "login.y"... 
+[2007-11-25 03:12:26,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (10 ms, 3599 lines/sec)
+[2007-11-25 03:12:26,YpageEngine,DEBUG] parsing ypage "access_log.y"... 
+[2007-11-25 03:12:26,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (9 ms, 5600 lines/sec)
+[2007-11-25 03:12:26,YpageEngine,DEBUG] parsing ypage "menu.y"... 
+[2007-11-25 03:12:26,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:12:26,YpageEngine,DEBUG] done (10 ms, 5799 lines/sec)
+[2007-11-25 03:12:26,server,INFO] Got webapp: [WebApp 'Server Management' on vhost 'tobi-desktop', urlprefix=/manage/]
+[2007-11-25 03:12:26,server,INFO] Loading webapp 'streapy_config'
+[2007-11-25 03:12:26,webapp,ERROR] !!! problem during webapp load: global name 'request' is not defined
+[2007-11-25 03:12:26,webapp,ERROR] !!! webapp=/streapy_config/
+[2007-11-25 03:12:26,webapp,ERROR] Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 113, in createWebApp
+    webapp = WebApp(WA)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 176, in __init__
+    self.snakelets[snk]=snakeletClass(snk,weakref.ref(self))  # create a snakelet instance.
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/snakelet.py", line 43, in __init__
+    self.init()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 6, in init
+    self.redirect('index.y',request,response)
+NameError: global name 'request' is not defined
+
+[2007-11-25 03:12:26,webapp,ERROR] Failed to load webapp, closing down
+[2007-11-25 03:12:26,server,ERROR] Error creating webapp: global name 'request' is not defined
+[2007-11-25 03:12:26,server,ERROR] Server couldn't start due to errors.
+[2007-11-25 03:13:33,server,INFO] ----------------------------------------
+[2007-11-25 03:13:33,server,INFO] Server is starting! Snakelets 1.44
+[2007-11-25 03:13:33,server,INFO] sendfile(2) is NOT available, compatible but slower file serving is used
+[2007-11-25 03:13:33,server,INFO] Creating server on "tobi-desktop"
+[2007-11-25 03:13:33,server,INFO] creating new server socket
+[2007-11-25 03:13:33,plugin,INFO] Loading plugins...
+[2007-11-25 03:13:33,server,WARNING] NOTICE: VirtualHost configuration is NOT enabled.
+[2007-11-25 03:13:33,server,WARNING] Defaulting to loading all available web apps to the current host.
+[2007-11-25 03:13:33,server,INFO] Processing virtual host 'tobi-desktop'
+[2007-11-25 03:13:33,server,INFO] Loading webapp 'manage'
+[2007-11-25 03:13:33,server,DEBUG] WEBAPP manage (1 snakelets )
+[2007-11-25 03:13:33,server,DEBUG]  name = Server Management
+[2007-11-25 03:13:33,server,DEBUG]   url = /manage/
+[2007-11-25 03:13:33,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "access_disp.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (1 ms, 25000 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "manage_template.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (10 ms, 1099 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "webapps.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (9 ms, 9600 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "serverinfo.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (10 ms, 8699 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "webappinfo.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (19 ms, 6100 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "sessions.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (10 ms, 5599 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (1 ms, 3000 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "login.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (1 ms, 36000 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "access_log.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (10 ms, 5599 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "menu.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (9 ms, 5800 lines/sec)
+[2007-11-25 03:13:33,server,INFO] Got webapp: [WebApp 'Server Management' on vhost 'tobi-desktop', urlprefix=/manage/]
+[2007-11-25 03:13:33,server,INFO] Loading webapp 'streapy_config'
+[2007-11-25 03:13:33,server,DEBUG] WEBAPP streapy_config (1 snakelets )
+[2007-11-25 03:13:33,server,DEBUG]  name = streaPy configuration Application
+[2007-11-25 03:13:33,server,DEBUG]   url = /streapy_config/
+[2007-11-25 03:13:33,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (10 ms, 4499 lines/sec)
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage ".tmp_index.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (1 ms, 14000 lines/sec)
+[2007-11-25 03:13:33,server,INFO] Got webapp: [WebApp 'streaPy configuration Application' on vhost 'tobi-desktop', urlprefix=/streapy_config/]
+[2007-11-25 03:13:33,server,INFO] Processing virtual host 'tobi-desktop' root webapp 'ROOT'
+[2007-11-25 03:13:33,server,DEBUG] WEBAPP ROOT (0 snakelets )
+[2007-11-25 03:13:33,server,DEBUG]  name = Web server root
+[2007-11-25 03:13:33,server,DEBUG]   url = /
+[2007-11-25 03:13:33,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 03:13:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:13:33,YpageEngine,DEBUG] done (10 ms, 3999 lines/sec)
+[2007-11-25 03:13:33,server,DEBUG] Got webapp: [WebApp 'Web server root' on vhost 'tobi-desktop', urlprefix=/]
+[2007-11-25 03:13:33,server,INFO] Default virtual host: tobi-desktop:9080
+[2007-11-25 03:13:33,server,INFO] 3 webapps registered.
+[2007-11-25 03:13:33,server,INFO] Snakelets 1.44 using port 9080
+[2007-11-25 03:13:43,server,DEBUG] 404 because file does not exist: /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/ROOT/favicon.ico
+[2007-11-25 03:14:03,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 03:14:03,server,DEBUG] 404 because file does not exist: /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/index2.y
+[2007-11-25 03:14:08,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 03:21:00,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 03:21:00,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:21:00,YpageEngine,DEBUG] done (1 ms, 5000 lines/sec)
+[2007-11-25 03:21:58,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 03:21:58,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:21:58,YpageEngine,DEBUG] done (1 ms, 4000 lines/sec)
+[2007-11-25 03:21:58,YpageEngine,DEBUG] parsing ypage "config_template.y"... 
+[2007-11-25 03:21:58,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:21:58,YpageEngine,DEBUG] done (10 ms, 4899 lines/sec)
+[2007-11-25 03:24:19,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 03:24:19,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:24:19,YpageEngine,DEBUG] done (1 ms, 4000 lines/sec)
+[2007-11-25 03:25:31,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 03:25:31,server,DEBUG] 404 because file does not exist: /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/index2.y
+[2007-11-25 03:27:28,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 03:27:28,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:27:28,YpageEngine,DEBUG] done (1 ms, 5000 lines/sec)
+[2007-11-25 03:28:14,YpageEngine,DEBUG] parsing ypage "config_template.y"... 
+[2007-11-25 03:28:14,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:28:14,YpageEngine,DEBUG] done (20 ms, 2449 lines/sec)
+[2007-11-25 03:43:59,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 03:43:59,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:43:59,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:43:59,YpageEngine,DEBUG] done (10 ms, 599 lines/sec)
+[2007-11-25 03:44:43,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:44:43,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:44:43,YpageEngine,DEBUG] done (1 ms, 6000 lines/sec)
+[2007-11-25 03:44:43,webapp,ERROR] PAGE '/streapy_config/server_config.y' threw exception: NameError: global name 'name' is not defined
+[2007-11-25 03:44:48,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:44:48,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:44:48,YpageEngine,DEBUG] done (1 ms, 6000 lines/sec)
+[2007-11-25 03:44:48,webapp,ERROR] PAGE '/streapy_config/server_config.y' threw exception: AttributeError: 'Page' object has no attribute 'name'
+[2007-11-25 03:46:35,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:46:35,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:46:35,YpageEngine,DEBUG] done (9 ms, 600 lines/sec)
+[2007-11-25 03:46:35,webapp,ERROR] PAGE '/streapy_config/server_config.y' threw exception: AttributeError: 'ContextContainer' object has no attribute 'name'
+[2007-11-25 03:46:36,webapp,ERROR] PAGE '/streapy_config/server_config.y' threw exception: AttributeError: 'ContextContainer' object has no attribute 'name'
+[2007-11-25 03:46:36,webapp,ERROR] PAGE '/streapy_config/server_config.y' threw exception: AttributeError: 'ContextContainer' object has no attribute 'name'
+[2007-11-25 03:46:46,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:46:46,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:46:46,YpageEngine,DEBUG] done (1 ms, 6000 lines/sec)
+[2007-11-25 03:47:07,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:47:07,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:47:07,YpageEngine,DEBUG] done (1 ms, 6000 lines/sec)
+[2007-11-25 03:50:14,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:50:14,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:50:14,YpageEngine,DEBUG] done (10 ms, 599 lines/sec)
+[2007-11-25 03:54:00,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:54:00,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:54:00,YpageEngine,DEBUG] done (1 ms, 21000 lines/sec)
+[2007-11-25 03:54:56,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:54:56,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:54:56,YpageEngine,DEBUG] done (1 ms, 19000 lines/sec)
+[2007-11-25 03:55:09,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:55:09,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:55:09,YpageEngine,DEBUG] done (10 ms, 1899 lines/sec)
+[2007-11-25 03:55:47,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:55:47,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:55:47,YpageEngine,DEBUG] done (1 ms, 19000 lines/sec)
+[2007-11-25 03:56:25,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:56:25,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:56:25,YpageEngine,DEBUG] done (10 ms, 1899 lines/sec)
+[2007-11-25 03:57:31,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 03:57:31,YpageEngine,DEBUG] compiling...
+[2007-11-25 03:57:31,YpageEngine,DEBUG] done (10 ms, 1899 lines/sec)
+[2007-11-25 04:00:46,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 04:00:46,YpageEngine,DEBUG] compiling...
+[2007-11-25 04:00:46,YpageEngine,DEBUG] done (1 ms, 19000 lines/sec)
+[2007-11-25 04:01:35,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 04:01:35,YpageEngine,DEBUG] compiling...
+[2007-11-25 04:01:35,YpageEngine,DEBUG] done (1 ms, 34000 lines/sec)
+[2007-11-25 04:02:06,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 04:02:06,YpageEngine,DEBUG] compiling...
+[2007-11-25 04:02:06,YpageEngine,DEBUG] done (10 ms, 3399 lines/sec)
+[2007-11-25 04:02:10,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 04:02:10,YpageEngine,DEBUG] compiling...
+[2007-11-25 04:02:10,YpageEngine,DEBUG] done (1 ms, 34000 lines/sec)
+[2007-11-25 04:02:42,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 04:02:42,YpageEngine,DEBUG] compiling...
+[2007-11-25 04:02:42,YpageEngine,DEBUG] done (1 ms, 34000 lines/sec)
+[2007-11-25 04:02:47,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 04:02:47,YpageEngine,DEBUG] compiling...
+[2007-11-25 04:02:47,YpageEngine,DEBUG] done (10 ms, 3399 lines/sec)
+[2007-11-25 04:03:36,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 04:03:36,YpageEngine,DEBUG] compiling...
+[2007-11-25 04:03:36,YpageEngine,DEBUG] done (1 ms, 39000 lines/sec)
+[2007-11-25 04:04:29,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 04:04:29,YpageEngine,DEBUG] compiling...
+[2007-11-25 04:04:29,YpageEngine,DEBUG] done (10 ms, 3899 lines/sec)
+[2007-11-25 04:18:51,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 04:18:51,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 04:58:04,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 04:58:14,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 04:58:14,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: getServerConfig() takes exactly 3 arguments (1 given)
+[2007-11-25 04:58:14,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 04:58:15,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: getServerConfig() takes exactly 3 arguments (1 given)
+[2007-11-25 04:58:15,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:05:48,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:05:48,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: getServerConfig() takes exactly 3 arguments (1 given)
+[2007-11-25 05:05:48,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:09:21,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:09:21,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: getServerConfig() takes exactly 3 arguments (1 given)
+[2007-11-25 05:09:36,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:09:36,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:09:36,YpageEngine,DEBUG] done (10 ms, 3899 lines/sec)
+[2007-11-25 05:09:36,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: getServerConfig() takes exactly 3 arguments (1 given)
+[2007-11-25 05:09:57,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:09:57,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:09:57,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:09:57,YpageEngine,DEBUG] done (10 ms, 3899 lines/sec)
+[2007-11-25 05:10:16,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:10:16,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: UnboundLocalError: local variable 'config' referenced before assignment
+[2007-11-25 05:10:16,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:10:20,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: UnboundLocalError: local variable 'config' referenced before assignment
+[2007-11-25 05:10:20,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:10:29,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:10:29,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: UnboundLocalError: local variable 'config' referenced before assignment
+[2007-11-25 05:10:29,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:10:45,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:10:46,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:10:46,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:10:49,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:10:49,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:10:50,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:10:50,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:10:50,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:10:50,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:10:50,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:10:50,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:03,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:04,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:04,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:04,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:04,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:05,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:05,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:06,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:06,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:06,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:06,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:06,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:06,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:07,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:07,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:07,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:07,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:08,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:08,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:08,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:08,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:09,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:09,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:09,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:09,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:10,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:10,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:10,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:10,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:10,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:10,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:10,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:10,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:10,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:10,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:17,webapp,DEBUG] redirected to signin page: /manage/login.y
+[2007-11-25 05:11:24,YpageEngine,DEBUG] parsing ypage "login"... 
+[2007-11-25 05:11:24,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:11:24,YpageEngine,DEBUG] done (1 ms, 36000 lines/sec)
+[2007-11-25 05:11:33,YpageEngine,DEBUG] parsing ypage "webappinfo"... 
+[2007-11-25 05:11:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:11:33,YpageEngine,DEBUG] done (20 ms, 6099 lines/sec)
+[2007-11-25 05:11:36,server,INFO] UNLOADING WEBAPP 'streapy_config' [tobi-desktop] id=0833002c
+[2007-11-25 05:11:36,server,DEBUG] WEBAPP streapy_config (1 snakelets )
+[2007-11-25 05:11:36,server,DEBUG]  name = streaPy configuration Application
+[2007-11-25 05:11:36,server,DEBUG]   url = /streapy_config/
+[2007-11-25 05:11:36,server,INFO] RELOADED WEBAPP 'streapy_config' [tobi-desktop] id=0832786c
+[2007-11-25 05:11:39,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:11:39,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:11:39,YpageEngine,DEBUG] done (10 ms, 3899 lines/sec)
+[2007-11-25 05:11:39,YpageEngine,DEBUG] parsing ypage "config_template.y"... 
+[2007-11-25 05:11:39,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:11:39,YpageEngine,DEBUG] done (10 ms, 4899 lines/sec)
+[2007-11-25 05:11:39,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:39,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:47,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:11:48,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:48,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:11:54,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:11:54,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:11:54,server,WARNING] Error during closing of connection: (107, 'Transport endpoint is not connected')
+[2007-11-25 05:12:04,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:12:04,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:14:08,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:14:08,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:14:09,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:14:09,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:14:18,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:14:18,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:14:18,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:14:19,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:14:19,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:14:19,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:15:41,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:15:47,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:15:47,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:15:59,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:15:59,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:16:00,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: OperationalError: unable to open database file
+[2007-11-25 05:16:04,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:16:29,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:22:55,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:23:21,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:23:21,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:23:21,YpageEngine,DEBUG] done (1 ms, 39000 lines/sec)
+[2007-11-25 05:23:35,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:23:35,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:23:35,YpageEngine,DEBUG] done (20 ms, 1949 lines/sec)
+[2007-11-25 05:32:33,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:32:33,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:32:33,YpageEngine,DEBUG] done (20 ms, 2199 lines/sec)
+[2007-11-25 05:33:01,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:33:01,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:33:01,YpageEngine,DEBUG] done (1 ms, 44000 lines/sec)
+[2007-11-25 05:33:28,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:33:28,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:33:28,YpageEngine,DEBUG] done (10 ms, 4399 lines/sec)
+[2007-11-25 05:37:18,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:37:18,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:37:18,YpageEngine,DEBUG] done (1 ms, 44000 lines/sec)
+[2007-11-25 05:40:39,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:40:39,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:40:50,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:40:50,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:40:51,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:42:10,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:42:10,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:42:24,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:42:26,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:42:30,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:42:31,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:42:31,YpageEngine,DEBUG] done (10 ms, 4399 lines/sec)
+[2007-11-25 05:42:32,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:42:36,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:43:14,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:43:28,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:44:25,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 05:44:25,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:44:25,YpageEngine,DEBUG] done (1 ms, 5000 lines/sec)
+[2007-11-25 05:44:31,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:51:21,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 05:51:22,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:52:00,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:52:02,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:52:02,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:52:02,YpageEngine,DEBUG] done (1 ms, 44000 lines/sec)
+[2007-11-25 05:52:03,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:52:10,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:52:55,server,DEBUG] 404 because file does not exist: /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/ROOT/account
+[2007-11-25 05:53:00,server,DEBUG] 404 because file does not exist: /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/ROOT/shop
+[2007-11-25 05:53:20,server,WARNING] Server got a keyboard interrupt signal
+[2007-11-25 05:53:20,server,WARNING] Server is shutting down.
+[2007-11-25 05:53:20,server,WARNING] ----------------------------------------
+[2007-11-25 05:53:20,server,INFO] Closing down webapps...
+[2007-11-25 05:53:20,server,DEBUG] closing [WebApp 'streaPy configuration Application' on vhost 'tobi-desktop', urlprefix=/streapy_config/]
+[2007-11-25 05:53:20,server,DEBUG] closing [WebApp 'Server Management' on vhost 'tobi-desktop', urlprefix=/manage/]
+[2007-11-25 05:53:20,server,DEBUG] closing [WebApp 'Web server root' on vhost 'tobi-desktop', urlprefix=/]
+[2007-11-25 05:53:20,plugin,INFO] Stopping plugins...
+[2007-11-25 05:53:20,server,INFO] Exiting.
+[2007-11-25 05:53:22,server,INFO] ----------------------------------------
+[2007-11-25 05:53:22,server,INFO] Server is starting! Snakelets 1.44
+[2007-11-25 05:53:22,server,INFO] sendfile(2) is NOT available, compatible but slower file serving is used
+[2007-11-25 05:53:22,server,INFO] Creating server on "tobi-desktop"
+[2007-11-25 05:53:22,server,INFO] creating new server socket
+[2007-11-25 05:53:22,plugin,INFO] Loading plugins...
+[2007-11-25 05:53:22,server,WARNING] NOTICE: VirtualHost configuration is NOT enabled.
+[2007-11-25 05:53:22,server,WARNING] Defaulting to loading all available web apps to the current host.
+[2007-11-25 05:53:22,server,INFO] Processing virtual host 'tobi-desktop'
+[2007-11-25 05:53:22,server,INFO] Loading webapp 'manage'
+[2007-11-25 05:53:22,server,DEBUG] WEBAPP manage (1 snakelets )
+[2007-11-25 05:53:22,server,DEBUG]  name = Server Management
+[2007-11-25 05:53:22,server,DEBUG]   url = /manage/
+[2007-11-25 05:53:22,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "access_disp.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (9 ms, 2500 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "manage_template.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 1099 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "webapps.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (9 ms, 9600 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "serverinfo.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 8699 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "webappinfo.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (30 ms, 4066 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "sessions.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 5599 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (1 ms, 3000 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "login.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (9 ms, 3600 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "access_log.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 5599 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "menu.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (19 ms, 2900 lines/sec)
+[2007-11-25 05:53:22,server,INFO] Got webapp: [WebApp 'Server Management' on vhost 'tobi-desktop', urlprefix=/manage/]
+[2007-11-25 05:53:22,server,INFO] Loading webapp 'account'
+[2007-11-25 05:53:22,server,DEBUG] WEBAPP account (1 snakelets )
+[2007-11-25 05:53:22,server,DEBUG]  name = Test Account/Login
+[2007-11-25 05:53:22,server,DEBUG]   url = /account/
+[2007-11-25 05:53:22,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "createprofile.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 4299 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "profilecreated.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (1 ms, 27000 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "logout.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 2099 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "login.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (9 ms, 7200 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "viewprofile.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 5699 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "loggedin.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 1999 lines/sec)
+[2007-11-25 05:53:22,server,INFO] Got webapp: [WebApp 'Test Account/Login' on vhost 'tobi-desktop', urlprefix=/account/]
+[2007-11-25 05:53:22,server,INFO] Loading webapp 'shop'
+[2007-11-25 05:53:22,server,DEBUG] WEBAPP shop (1 snakelets )
+[2007-11-25 05:53:22,server,DEBUG]  name = E-shop demo
+[2007-11-25 05:53:22,server,DEBUG]   url = /shop/
+[2007-11-25 05:53:22,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "checkout.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (9 ms, 5900 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "exit.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 3299 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "products.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (1 ms, 29000 lines/sec)
+[2007-11-25 05:53:22,YpageEngine,DEBUG] parsing ypage "cart.y"... 
+[2007-11-25 05:53:22,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:22,YpageEngine,DEBUG] done (10 ms, 2099 lines/sec)
+[2007-11-25 05:53:22,server,INFO] Got webapp: [WebApp 'E-shop demo' on vhost 'tobi-desktop', urlprefix=/shop/]
+[2007-11-25 05:53:22,server,INFO] Loading webapp 'streapy_config'
+[2007-11-25 05:53:23,server,DEBUG] WEBAPP streapy_config (1 snakelets )
+[2007-11-25 05:53:23,server,DEBUG]  name = streaPy configuration Application
+[2007-11-25 05:53:23,server,DEBUG]   url = /streapy_config/
+[2007-11-25 05:53:23,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (1 ms, 5000 lines/sec)
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage ".tmp_server_config.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (10 ms, 4399 lines/sec)
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (10 ms, 4399 lines/sec)
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "config_template.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (9 ms, 4900 lines/sec)
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage ".tmp_config_template.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (20 ms, 2449 lines/sec)
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage ".tmp_index.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (1 ms, 14000 lines/sec)
+[2007-11-25 05:53:23,server,INFO] Got webapp: [WebApp 'streaPy configuration Application' on vhost 'tobi-desktop', urlprefix=/streapy_config/]
+[2007-11-25 05:53:23,server,INFO] Loading webapp 'shared2'
+[2007-11-25 05:53:23,server,DEBUG] WEBAPP shared2 (0 snakelets )
+[2007-11-25 05:53:23,server,DEBUG]  name = Shared Session webapp 2
+[2007-11-25 05:53:23,server,DEBUG]   url = /shared2/
+[2007-11-25 05:53:23,server,WARNING] shared2 shares the session with other webapps. Possible security problem!
+[2007-11-25 05:53:23,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (10 ms, 5799 lines/sec)
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "login.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (10 ms, 3099 lines/sec)
+[2007-11-25 05:53:23,server,INFO] Got webapp: [WebApp 'Shared Session webapp 2' on vhost 'tobi-desktop', urlprefix=/shared2/]
+[2007-11-25 05:53:23,server,INFO] Loading webapp 'shared1'
+[2007-11-25 05:53:23,server,DEBUG] WEBAPP shared1 (0 snakelets )
+[2007-11-25 05:53:23,server,DEBUG]  name = Shared Session webapp 1
+[2007-11-25 05:53:23,server,DEBUG]   url = /shared1/
+[2007-11-25 05:53:23,server,WARNING] shared1 shares the session with other webapps. Possible security problem!
+[2007-11-25 05:53:23,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (19 ms, 2900 lines/sec)
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "login.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (10 ms, 3099 lines/sec)
+[2007-11-25 05:53:23,server,INFO] Got webapp: [WebApp 'Shared Session webapp 1' on vhost 'tobi-desktop', urlprefix=/shared1/]
+[2007-11-25 05:53:23,server,INFO] Loading webapp 'music'
+[2007-11-25 05:53:23,server,DEBUG] WEBAPP music (3 snakelets )
+[2007-11-25 05:53:23,server,DEBUG]  name = Music browser
+[2007-11-25 05:53:23,server,DEBUG]   url = /music/
+[2007-11-25 05:53:23,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (20 ms, 5949 lines/sec)
+[2007-11-25 05:53:23,server,INFO] Got webapp: [WebApp 'Music browser' on vhost 'tobi-desktop', urlprefix=/music/]
+[2007-11-25 05:53:23,server,INFO] Processing virtual host 'tobi-desktop' root webapp 'ROOT'
+[2007-11-25 05:53:23,server,DEBUG] WEBAPP ROOT (0 snakelets )
+[2007-11-25 05:53:23,server,DEBUG]  name = Web server root
+[2007-11-25 05:53:23,server,DEBUG]   url = /
+[2007-11-25 05:53:23,webapp,INFO] Precompiling all Ypages...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] parsing ypage "index.y"... 
+[2007-11-25 05:53:23,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:53:23,YpageEngine,DEBUG] done (9 ms, 4000 lines/sec)
+[2007-11-25 05:53:23,server,DEBUG] Got webapp: [WebApp 'Web server root' on vhost 'tobi-desktop', urlprefix=/]
+[2007-11-25 05:53:23,server,INFO] Default virtual host: tobi-desktop:9080
+[2007-11-25 05:53:23,server,INFO] 8 webapps registered.
+[2007-11-25 05:53:23,server,INFO] Snakelets 1.44 using port 9080
+[2007-11-25 05:54:18,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:54:18,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:54:18,YpageEngine,DEBUG] done (10 ms, 4399 lines/sec)
+[2007-11-25 05:54:41,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:54:41,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:54:41,YpageEngine,DEBUG] done (10 ms, 4399 lines/sec)
+[2007-11-25 05:54:42,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:56:25,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:56:25,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:56:25,YpageEngine,DEBUG] done (10 ms, 4399 lines/sec)
+[2007-11-25 05:56:26,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:57:05,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:57:05,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:57:05,YpageEngine,DEBUG] done (1 ms, 44000 lines/sec)
+[2007-11-25 05:57:06,webapp,ERROR] PAGE '/streapy_config/serverConfig.sn' threw exception: TypeError: not indexable
+[2007-11-25 05:57:30,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:57:30,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:57:30,YpageEngine,DEBUG] done (1 ms, 44000 lines/sec)
+[2007-11-25 05:57:42,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 05:57:42,YpageEngine,DEBUG] compiling...
+[2007-11-25 05:57:42,YpageEngine,DEBUG] done (1 ms, 44000 lines/sec)
+[2007-11-25 06:04:34,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:04:34,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34502)
+[2007-11-25 06:04:34,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:04:34,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:04:36,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:04:36,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34503)
+[2007-11-25 06:04:36,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:04:36,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:01,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:01,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34504)
+[2007-11-25 06:05:01,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:01,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:02,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:02,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34505)
+[2007-11-25 06:05:02,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:02,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:02,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:02,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34506)
+[2007-11-25 06:05:02,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:02,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:02,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:02,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34507)
+[2007-11-25 06:05:02,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:02,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:03,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:03,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34508)
+[2007-11-25 06:05:03,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:03,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:03,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:03,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34509)
+[2007-11-25 06:05:03,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:03,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:21,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:21,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34510)
+[2007-11-25 06:05:21,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:21,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:23,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:23,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34511)
+[2007-11-25 06:05:23,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:23,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:05:29,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:05:29,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34514)
+[2007-11-25 06:05:29,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+[2007-11-25 06:05:29,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 37
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 37, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 37)
+
+[2007-11-25 06:06:35,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:06:35,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34515)
+[2007-11-25 06:06:35,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 38, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 38)
+[2007-11-25 06:06:35,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 38
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 38, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 38)
+
+[2007-11-25 06:06:42,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:06:42,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34516)
+[2007-11-25 06:06:42,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 38, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 38)
+[2007-11-25 06:06:42,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 38
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 38, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 38)
+
+[2007-11-25 06:06:56,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:06:56,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34517)
+[2007-11-25 06:06:56,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 38, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 38)
+[2007-11-25 06:06:56,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 38
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 38, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 38)
+
+[2007-11-25 06:07:09,YpageEngine,DEBUG] parsing ypage "server_config.y"... 
+[2007-11-25 06:07:09,YpageEngine,DEBUG] compiling...
+[2007-11-25 06:07:09,YpageEngine,DEBUG] done (1 ms, 44000 lines/sec)
+[2007-11-25 06:07:18,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:07:18,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34525)
+[2007-11-25 06:07:18,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 38, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 38)
+[2007-11-25 06:07:18,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 38
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 38, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 38)
+
+[2007-11-25 06:07:26,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:07:38,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:07:38,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34532)
+[2007-11-25 06:07:38,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+[2007-11-25 06:07:38,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 40
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+
+[2007-11-25 06:08:04,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:08:04,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34533)
+[2007-11-25 06:08:04,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 39, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 39)
+[2007-11-25 06:08:04,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 39
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 39, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 39)
+
+[2007-11-25 06:08:05,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:08:05,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34534)
+[2007-11-25 06:08:05,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 39, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 39)
+[2007-11-25 06:08:05,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 39
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 39, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 39)
+
+[2007-11-25 06:08:14,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:08:14,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34535)
+[2007-11-25 06:08:14,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+[2007-11-25 06:08:14,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 40
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+
+[2007-11-25 06:08:15,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:08:15,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34536)
+[2007-11-25 06:08:15,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+[2007-11-25 06:08:15,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 40
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+
+[2007-11-25 06:08:15,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:08:15,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34537)
+[2007-11-25 06:08:15,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+[2007-11-25 06:08:15,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 40
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+
+[2007-11-25 06:08:15,webapp,DEBUG] reloading snakelet module 'webapps.streapy_config.server_config'
+[2007-11-25 06:08:15,server,ERROR] Exception happened during processing of request from ('127.0.1.1', 34538)
+[2007-11-25 06:08:15,server,ERROR] It was: <type 'exceptions.SyntaxError'>; Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+[2007-11-25 06:08:15,server,ERROR] Traceback: Traceback (most recent call last):
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 1021, in process_request_Thread
+    self.RequestHandlerClass(request, client_address, self)
+  File "SocketServer.py", line 522, in __init__
+    self.handle()
+  File "BaseHTTPServer.py", line 316, in handle
+    self.handle_one_request()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 171, in handle_one_request
+    method()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 180, in do_GET
+    f=self.do_GETorHEAD()
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/server.py", line 300, in do_GETorHEAD
+    return web.do_GET(self, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 275, in do_GET
+    return pageprocessor.do_GET(passthroughRequest, passthroughResponse, timeoutpage=timeout)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 320, in do_GET
+    return self.webapp.run_snakelet(self.handler, self.url, self.pathinfo, self.args, passthroughRequest, passthroughResponse)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/snakeserver/webapp.py", line 513, in run_snakelet
+    reload(module)
+  File "/home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py", line 40
+SyntaxError: Non-ASCII character '\xc3' in file /home/tobi/programming/streapy/snakelets_webserver/Snakelets-1.44/webapps/streapy_config/server_config.py on line 40, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details (server_config.py, line 40)
+

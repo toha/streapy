@@ -1,0 +1,170 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	background-image: url("bg.gif");
+	background-repeat: repeat-x;
+	font-family: Arial, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;	
+}
+.header {
+	height: 134px;
+	width: 100%;
+	background-image: url("header.gif");
+}
+
+.login_header {
+    height: 94px;
+    width: 100%;
+    background-image: url("header.gif");
+	position: absolute;
+	top: 40%;
+	padding-top: 40px;	
+	text-align: center;
+	
+}
+
+.logo {
+	font-size: 32px;	
+	font-family: Verdana, Geneva, Arial, Helvetica;
+	position: absolute;
+	left: 270px;
+	top: 40px;
+	color: #fff;
+}
+
+.subtitle {
+	font-size: 14px;	
+	font-family: Verdana, Geneva, Arial, Helvetica;	
+}
+
+.subheader {
+	height: 33px;
+	width: 562px;
+	background-image: url("subheader.gif");	
+	position: absolute;
+	top: 101px;
+	left: 50%; 
+	margin-left: -281px;
+}
+
+.content  {
+	width: 542px;
+	position: absolute;
+	background-color: #fff;
+	padding: 10px;
+	left: 50%; 
+	margin-left: -281px;
+}
+
+.menu {
+	position:absolute;
+	left: 0px;
+	top: 133px;
+	width: 180px;
+	border-left: 1px solid #399ae8;
+	border-right: 1px solid #399ae8;
+	border-bottom: 1px solid #399ae8;		
+}
+
+.menu_element_first {
+	padding: 4px;
+	background-color: #fff;
+	color: #000;
+}
+
+.menu_element {
+	border-top: 1px solid #fff;	
+	padding: 5px;
+	background-color: #fff;
+	color: #000;
+}
+
+a, a:link, a:visited, a:hover, a:active {
+	color: #000;
+	text-decoration: none;
+	border: 0px solid #fff;
+}
+
+img {
+	border: 0px solid #fff;
+}
+
+h1 {
+	font-family: Arial, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;	
+	margin-top: 0px;
+}
+
+
+
+ .form_reihe {
+	padding-top: 3px;
+	clear : both;
+
+}
+
+.form_label {
+	float: left;
+	width: 215px;
+	text-align: right;
+	font-weight : bold; 
+	height: 25px;
+}
+
+
+.form_input {
+	float: right;
+	width: 300px;
+	text-align: left;
+
+}
+
+.input_feld {
+	width: 220px;
+	border: 1px solid #000;
+
+}
+
+
+.input_button {
+	border: 1px solid #000;
+
+}
+
+table {
+	width: 100%;
+}
+
+.width50 {
+	width: 50%;
+	text-align: left;
+}
+
+th {
+	text-align: left;
+}
+
+.hidden  {
+	display: none;
+}
+
+.cont_change {
+	border: 1px dashed #399ae8;
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.clearer {
+	clear: both;
+}
+
+form {
+	margin:0;
+	padding:0;
+	display:inline;
+}
+
+.ajax_load {
+	text-align: center;
+}

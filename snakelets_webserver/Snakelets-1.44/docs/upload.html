@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Uploaded files</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Uploaded Files (form POST): FormUploadedFile</h2>
+<p>The values of a form parameter that you get from the request object (via getForm() or getParameter() ) can be one of three things: a plain string, a list (of strings) or a FormUploadedFile object (when the user has uploaded a file).
+Import the class like this:</p>
+<pre>from snakeserver.webform import FormUploadedFile, FormFileUploadError</pre> 
+<p>The following attributes are defined on that object:</p>
+<table summary="FormUploadedFile class methods">
+  <tbody>
+    <tr>
+      <th>attribute</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>form field name</td>
+    </tr>
+    <tr>
+      <td>file</td>
+      <td>file object to read file contents from</td>
+    </tr>
+    <tr>
+      <td>filename</td>
+      <td>filename (the base name; i.e. without any path)</td>
+    </tr>
+    <tr>
+      <td>mimeType</td>
+      <td>mime type of the uploaded file (such as 'image/gif')</td>
+    </tr>
+    <tr>
+      <td>disposition</td>
+      <td>disposition (such as 'form-data')</td>
+    </tr>
+    <tr>
+      <td>dispositionOptions</td>
+      <td>disposition options (dict)</td>
+    </tr>
+    <tr>
+      <td>typeOptions</td>
+      <td>type options (dict)</td>
+    </tr>
+  </tbody>
+</table>
+<p>Don't forget the maxPOSTsize attribute of the Request object. It is 200000 (200 Kb) by default, if you need bigger POSTs, increase this value (request.setMaxPOSTsize() ) before calling Request.getForm(). If a form upload is bigger than maxPOSTsize, you will get a <code>snakeserver.webform.FormFileUploadError</code> exception .</p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

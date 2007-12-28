@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - WebApp</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>WebApp</h2>
+<p>Snakelets run inside a WebApp context (snakeserver.webapp.WebApp). You can get the current WebApp object by calling getWebApp() on the request or the snakelet object itself. You can then use the following methods from the webapp:</p>
+<table summary="WebApp class methods">
+  <tbody>
+    <tr>
+      <th>Method</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>getName()</td>
+      <td>a tuple: (short name, full name). The short name is taken from the webapp directory it is in. Full name is specified in the webapp descriptor __init__.py file.</td>
+    </tr>
+    <tr>
+      <td>getVirtualHost()</td>
+      <td>a tuple (hostname, portnumber) of the 'virtual host' this webapp is running on. Does not take vhost aliasing in account; if you need the 'real' vhost and port that the request arrived on, use <code>request.getServerName()</code>.</td>
+    </tr>
+    <tr>
+      <td>isEnabled()</td>
+      <td>is the webapp enabled? (True or False)</td>
+    </tr>
+    <tr>
+      <td>setEnabled(enabled)</td>
+      <td>enable or disable this webapp</td>
+    </tr>
+    <tr>
+      <td>getFileSystemPath()</td>
+      <td>the filesystem path where the webapp's files are located</td>
+    </tr>
+    <tr>
+      <td>getDocRootPath()</td>
+      <td>the web document root, where the pages, images, etc are located</td>
+    </tr>
+    <tr>
+      <td>getContext()</td>
+      <td>webapp context (ContextContainer object). Scope: web app. <em>shared for all users/requests</em></td>
+    </tr>
+    <tr>
+      <td>getURLprefix()</td>
+      <td>the URL prefix that is used for urls inside this webapp (example: &quot;/shop/&quot;) This prefix includes the (optional) server-wide prefix.</td>
+    </tr>
+    <tr>
+      <td>getAssetprefix()</td>
+      <td>the asset base location as specified in the WebApp's config file.</td>
+    </tr>
+    <tr>
+      <td>mkUrl(path)<br/>mkUrl(path, arg="", params=[], htmlescape=True)</td>
+      <td>create a correct URL based on the webapp's url prefix, and automatically 
+        html-escapes the resulting string so you can directly use it in your html output.
+        arg (optional) can be given a string that should become the url 'arg'.
+        params (optional) can be given a dict or a sequence that contains the name/values that should become the query params.
+          By setting the optional htmlescape param to False, no escaping will be done (and the resulting string
+          can no longer be directly used in html output because there is a risk of generating invalid html)
+        </td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">mkAssetUrl(path)<br/>mkAssetUrl(path, htmlescape=True)</td>
+      <td>create a correct URL for the static asset (images, files etc) based on the asset base location.
+          It automatically html-escapes the resulting string so you can directly use it in your html output.
+          By setting the optional htmlescape param to False, no escaping will be done (and the resulting string
+          can no longer be directly used in html output because there is a risk of generating invalid html)
+        </td>
+    </tr>
+    <tr>
+      <td>getSnakelet(urlpattern)</td>
+      <td>returns the snakelet instance belonging to the given urlpattern (from the webapp init file)</td>
+    </tr>
+    <tr>
+      <td>getConfigItems()</td>
+      <td>the dictionary of all user config items</td>
+    </tr>
+    <tr>
+      <td>getConfigItem(item)</td>
+      <td>the value of a single user config item</td>
+    </tr>
+    <tr>
+      <td>addPlugin(plugin)</td>
+      <td>add a webapp-specific plugin (for instance to do things at session creation time). <code>plugin</code> is your plugin instance. 
+          If a plugin with the same name already exists, a ValueError will be raised. 
+          If your webapp is deployed on multiple vhosts, you should be prepared for this (the webapp's init code will be called multiple times).
+          For more info, see the section on <a href=
+        "plugins.html">plugins</a>.</td>
+    </tr>
+    <tr>
+      <td>serveStaticFile(filename, response, useResponseHeaders=False)</td>
+      <td>Use the server's internal code to serve a static file to the client.
+        This is useful in snakelets that return files (such as download controllers).
+        You can fool around with setting the correct headers, and reading/writing the file
+        efficiently to the response stream yourself, but it's usually much better to use this function instead.
+        The response object must not be used prior to this call. You cannot set custom HTTP headers,
+        but the required ones will be generated for you automatically (such as content-lenth).
+        The filename must be the absolute path to to file that must be served.
+        This must be the last action in your snakelet that generates output (the response's output must not be used at all)
+        The file serve loop is quite efficient and will use the sendfile system call if available.
+        <em>NOTE:</em> the server's RequestPlugins are <em>not</em> invoked on static files! (partly
+    due to the efficient stripped down processing code for static files to obtain higher performance)
+        <br/>The <code>useResponseHeaders</code> parameter tells the server if it should add the HTTP headers from the
+    request object (such as Cache-Control, Content-Disposition and other headers). Defaults to False.
+         </td>
+    </tr>
+  </tbody>
+</table>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>

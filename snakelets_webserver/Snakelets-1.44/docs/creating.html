@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Snakelets Manual - Creating a web application</title>
+<link href="manual.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<h2>Creating a Web Application</h2>
+<p>The web application that you will be making is essentially a lot of files in one or more directories. Static content files such as html files and images, dynamic content files such as Ypages, and web application code itself (python source code files). This chapter shows how they all fit together.</p>
+<p>FIrst you have to create and configure your web application, and then you must fill it with web pages.</p>
+<h3>Setting up the web application </h3>
+<p>Put your stuff in a Python module in the &quot;webapps&quot; directory. The directory (module) name is also the name and URL context name of your web application.
+So when your webapp is in a directory called <code>store</code>, it will be accessible
+with the URL <code>http://server.com/store/</code>
+There is one special reserved name:
+if you have a web app named &quot;ROOT&quot; that one will be used as the web application for the root context '/'. (When you are using Virtual Hosting settings, you can change this, it is only used when no vhosts are defined).</p>
+<p> The module's __init__.py must contain the configuration settings for your web app:</p>
+<table summary="Webapp module attributes">
+  <tbody>
+    <tr>
+      <th>Attribute</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>The descriptive name for this webapp</td>
+    </tr>
+    <tr>
+      <td>docroot</td>
+      <td>The (relative) directory where files are served from, usually &quot;.&quot; (which means the directory of the webapp itself). Many webapps also choose to use &quot;docroot&quot; or something similar, and then put all files into a docroot/ subdirectory. This is a bit more secure because it is not possible to access files outside this directory, so you can place code or other data in the webapp directory without worrying about this. </td>
+    </tr>
+    <tr>
+        <td>assetLocation</td>
+        <td>The (relative or absolute) url location where static assets are to be found.
+            If you use a relative location (&quot;static/img/&quot; for instance), the assets
+			are located inside the webapp's docroot (use &quot;.&quot; to use the docroot directory itself, instead
+			of a directory inside it).
+            If you use an absolute location (&quot;/static/&quot; for instance), the assets
+            are located in another web app or path entirely (but still on the same web server).
+            It is also possible to put a totally different url here such as &quot;http://images.server.com/img/&quot;
+            to be able to serve static assets (images, files) from an entirely different server.
+            This setting is used by the <code>asset</code> Ypage function and the <code>mkAssetUrl</code> Webapp function.
+        </td>
+    </tr>
+    <tr>
+      <td>snakelets</td>
+      <td>a dict that maps (relative) URL patterns to snakelet <em>classes</em>. With this you define the snakelets in your web application, and on what URLs they are 'listening'. Don't forget to import the required modules/classes. You can use 'fnmatch'-style patterns here, for instance: <code>docs/*.pdf</code> would let the snakelet listen on any URL that matches this pattern, such as <code>http://.../docs/report.pdf</code> (the full URL must match the pattern). If you don't use a pattern, any URL that <em>starts with</em> the string matches. Note that if you use fnmatch-patterns, you cannot use <em>path info</em> arguments anymore (only query args): <code>http://.../docs/report.pdf/path/info?foo=bar</code> doesn't work, but <code>http://.../docs/report.pdf?foo=bar</code> still does.
+<br/>See below how you can use Snakelets as virtual <a href="#indexpages_title">index pages</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>configItems</td>
+      <td>a dict that you can fill with any config items you want to be available in the web app trough the getConfigItem() method.</td>
+    </tr>
+    <tr>
+      <td>sessionTimeoutSecs</td>
+      <td>the inactivity period it takes for a user session to be deleted automatically. Default=600 seconds (10 minutes).</td>
+    </tr>
+    <tr>
+        <td>sessionTimeoutPage</td>
+        <td>the (webapp-relative) url for the page that will be shown when the user's session has become unavailable (usually due to a session timeout that
+        caused the session to be destroyed in the server). Default behavior is to just try to create a new session - without notice.</td>
+    </tr>
+    <tr>
+      <td>sharedSession</td>
+      <td>boolean that says if this webapp should use the <em>global shared session. </em>Every webapp that has this on True will not use its own session, but instead share a single global session. This can be used for single signon, for instance, because the logged in user object is also shared. For more info see <a href="authorization.html">authorization</a>. (The default value is False: use a unique, private session) <br />
+        <em>Note: </em>shared session does <em>NOT</em> mean that different <em>users</em> share a session. Every user ofcourse has her own private session!</td>
+    </tr>
+    <tr>
+      <td>sharedSessionTLD</td>
+      <td>Cookie domain to use for shared session cookies. Useful when the same webapp is mounted on mulitple virtual hosts
+         (by aliasing only!), for example xx.domain.tld, yy.domain.tld, and you want to share sessions among these subdomains.
+         Define <code>sharedSessionTLD = 'domain.tld'</code> and the shared session cookie is availble to both subdomains.
+         Note: you have to do define this for all shared webapps. Also this cookie sharing does only work on aliased
+         virtual hosts, not across real virtual hosts.</td>
+    </tr>
+    <tr>
+        <td>defaultRequestEncoding</td>
+        <td>Specify the default encoding that will be used when reading incoming request data (such as form-posts).
+            If you don't specify this, Python's default encoding is used (usually ASCII).
+            You can override this in your page/snakelet by using request.setEncoding().
+        </td>
+    </tr>
+    <tr>
+      <td>defaultOutputEncoding</td>
+      <td>Specify the output character encoding of dynamic pages (Ypages, snakelets) that don't specify an encoding themselves (or obtain one from a template page). If they set an encoding themselves, that one is used. Default=None; no encoding.
+        If you don't specify this, Python's default output encoding is used (usually ASCII) but beware that this will very likely break pages that try to use non-ASCII characters.
+        If you want to be safe and support Unicode output, you should define a page output encoding, either by setting
+        it globally using this option or by setting it on the pages itself.</td>
+    </tr>
+    <tr>
+      <td>defaultContentType</td>
+      <td>Specify the content type of dynamic pages (Ypages, snakelets) that don't specify a content type themselves (or obtain one from a template page). If they set a content type themselves, that one is used. Default=text/html</td>
+    </tr>
+    <tr>
+      <td>defaultPageTemplate</td>
+      <td>Specify the default page template file to use for formatting dynamic pages without an explicit page template declaration. Default=None; no page template. Doesn't work on snakelets, only Ypages.</td>
+    </tr>
+    <tr>
+      <td>defaultErrorPage</td>
+      <td>Specify the default errorpage to use for formatting server error pages. This saves you from having to specify an errorpage in every Ypage file. Works for snakelets and Ypages. </td>
+    </tr>
+    <tr>
+      <td><a name="indexpages">indexPages</a></td>
+      <td>Setting this value allows you to use a custom 'index pages' list on a site-by-site basis.
+It will override the default list of index pages that Snakelets looks for. If you don't specify it, the
+default list is used. The built-in default list is <code>index.y, index.html, index.htm</code> (in this order).
+Only real files can be mentioned in this list. It is possible to use Snakelets as <a href="#indexpages_title">'virtual' index pages</a> but that is configured elsewhere.
+</td>
+    </tr>
+    <tr>
+      <td class="nowrap">def dirListAllower(path): ...</td>
+      <td>define this function to allow directory listings for the path (regardless of user authorization). Return True if allowed. By default, directory listing is not allowed. Path is relative for the web app, for instance &quot;img/picture.gif&quot;</td>
+    </tr>
+    <tr>
+      <td class="nowrap">def documentAllower(path): ...</td>
+      <td>define this function to allow serving the given document (regardless of user authorization). Return True if allowed. By default, all documents are allowed except Python source files (.py suffix). Path is relative for the web app, for instance &quot;img/picture.gif&quot;</td>
+    </tr>
+    <tr>
+      <td>authorizationPatterns</td>
+      <td>a dict that maps (relative) URL patterns to lists of privilege names that are allowed to access those URLs. <em>Note that the full URL must match the pattern before authorization is required, so Snakelets automatically appends the *-wildcard to the end of your pattern to avoid security holes. (Also: the server-wide url prefix is automatically prepended to your patterns)</em> See <a href=
+        "authorization.html">authorization</a>. Default: all URLs are allowed (no privilege checks).</td>
+    </tr>
+    <tr>
+      <td>authenticationMethod</td>
+      <td>tuple (method, argument) that defines the user authentication method to use for the whole webapp. See <a href=
+        "authorization.html">authorization</a>. Default: not specified. This setting can be overruled by a corresponding page declaration or snakelet method.</td>
+    </tr>
+    <tr>
+      <td>def authorizeUser(method, url, user, passwd, request): ...</td>
+      <td>You must implement this method yourself if you let Snakelets do the user authentication. It must do the actual user/password checking, see <a href=
+        "authorization.html">authorization</a>.</td>
+    </tr>
+    <tr>
+      <td class="nowrap">def init(webapp): ...</td>
+      <td>You may define this function to do your webapp's initialization. Parameter is the current webapp.
+          <em>Note:</em> when you are deploying your webapp on multiple vhosts, the <code>init</code> is
+          called once for each vhost! Be prepared for this, especially when you are doing system-global
+          initialisation code such as registering server plugins... (you should trap possible errors,
+          or add some code that makes sure that such things are only done once)</td>
+    </tr>
+    <tr>
+      <td class="nowrap">def close(webapp): ...</td>
+      <td>You may define this function to do your webapp's cleanup when it is removed. Parameter is the current webapp.
+          <em>Note:</em> when you are deploying your webapp on multiple vhosts, the <code>init</code> is
+          called once for each vhost! </td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>vhost config:</strong> To make your web application appear on the server, you have to add it to the virtual host configuration file. See <a href="starting.html">Starting the Server</a>.</p>
+<p><strong>Python module/package names:</strong> There is a big catch concerning the naming of your packages and modules in the web apps (for instance, the package where your snakelets are in, or the name(s) of the modules that contain your snakelets). <em>They are not unique over all web applications (because every webapp's directory is placed in Python's module search path)!</em> This means that you cannot have a module or package called &quot;snakelets&quot; in one webapp and also a module or package with that name in another web application. This also means that your code is not protected from (ab)use by another web application. <em>This wil very likely not be fixed, so keep this in mind!</em></p>
+<p><strong>Shared modules/libraries: </strong>place modules and packages that you want to easily share between webapps in the &quot;userlibs&quot; directory, as described in <a href="starting.html">Starting and Configuring</a>. </p>
+<h3>Create pages for the web application</h3>
+<p>Let's say that you have created a web application &quot;testapp&quot; and that it has a &quot;docroot&quot; directory where you will put your page files, so you must point the docroot attribute to it in the webapp's init file, as described above. The files in that directory will now be accessible in your browser by using the url base: <strong>http://server.com/testapp/</strong></p>
+<p>The index page of the webapp will be shown if you type <strong>http://server.com/testapp/</strong> or <strong>http://server.com/testapp</strong> in your browser. The trailing slash is not really required; you will be redirected to a correct url if it is missing.
+    (except when there is a page in the root webapp with the same name, in this case the page is loaded and you will not be redirected).</p>
+<p>Snakelets maps the rest of the URL to the filesystem (=the contents of the docroot directory) in a rather straightforward way, much the same as a normal web server such as Apache does this. A path component in the url maps to a directory on disk, and a file component usually maps to a file on disk. So that means that when the url <strong>http://server.com/testapp/office/page.html</strong> is requested, Snakelets will return the &quot;page.html&quot; file from the &quot;office&quot; directory in the docroot location. For Ypages it is the same, <strong>http://server.com/testapp/office/login.y </strong>will cause Snakelets to load and run the &quot;login.y&quot; ypage in the given location. </p>
+<p>It is <em>impossible</em> to request files outside the docroot location this way. That is nice, because you can protect your other files (web app source code and such) very easily just by placing them in a different directory as your web pages. You could fool around with the documentAllower function but this is more convenient and faster.</p>
+<p>There is a big exception to the simple URL-to-filesystem mapping: <em><a href="snakelet.html">Snakelets</a>. </em>Dynamic content created by a snakelet page is not found on disk in the regular way. Instead, there is a <em>snakelet</em> object defined in your Python source code that is called by the server when a URL is requested that triggers the snakelet. Which URLs trigger which snakelets, is configured in the &quot;snakelets&quot; attribute in your webapp init file (see above). Because you can use simple wildcard patterns there, a lot of URLs may be mapped onto a single snakelet object. </p>
+<p>The server uses the following order to determine what is returned for a requested URL:</p>
+<ol>
+  <li>Snakelet url/patterns</li>
+  <li>Dynamic page (Ypage)</li>
+  <li>Static page/file (.html etc) </li>
+</ol>
+<h4><a name="indexpages_title"><strong>Index pages</strong></a></h4>
+<p>When you leave out a specific page name from an url (example: <code>http://server.com/app/info/</code>)
+the server will try to fetch the <em>index page</em> for that directory.
+If there is a file <code>index.html</code> (or <code>index.y</code>) in that location, Snakelets
+will load that one. It is as if you typed the url <code>http://server.com/app/info/index.y</code>.
+<br/>
+See <a href="#indexpages">above</a> at the <code>indexPages</code> variable what the default list of
+files is that are searched for, and how you can change this.</p>
+<p>Snakelet as index page: if no other suitable page is found, the server will also try to use a Snakelet as index page.
+You have to configure a snakelet with a suitable URL pattern to make this work.
+The server looks for <code>index.sn</code> Snakelet in the requested URL path, so
+when the URL &quot;http://server.com/test/dir/&quot; is requested and you have configured
+a snakelet in the &quot;test&quot; webapp on the pattern <code>dir/index.sn</code> or <code>*/index.sn</code>
+it will be used as index page. You can also use a Snakelet as 'root' index page in your webapp,
+but you will have to add it explicitly to the Snakelet list (because of the way the fnmatch
+urlpatterns work): use the pattern <code>index.sn</code> (no pre- or suffixes).
+<br/>To avoid conflicts with other snakelets, <em>it is required</em> that the url pattern for your index snakelet(s)
+explicitly ends in '<code>index.sn</code>'.
+<br/><em>Note that you can create 'fake' directories using index Snakelets;</em> the directory that you use in
+the snakelet url path pattern doesn't have to exist on disk - in contrast to regular index pages.</p>
+
+<h4><strong>Smart Suffix Search </strong></h4>
+<p>Snakelets also uses a 'smart suffix search'. This means that it is not strictly required to have the correct file suffix in the URL. This allows for 'cleaner' URLs.
+If a page is not found, Snakelets will try again by -internally- appending the <code>.y</code>, <code>.html</code> and <code>.htm</code> suffixes (in that order).
+ For instance, <strong>http://server.com/testapp/office/login.y</strong> will load the &quot;login.y&quot; Ypage, but so will <strong>http://server.com/testapp/office/login </strong>(the same url but without the .y suffix). 
+ Notice that dynamic content has higher priority than static content, so if &quot;login.y&quot; and &quot;login.html&quot; both exist, the server will use &quot;login.y&quot;. This mechanism is rather useful when you are setting up a website: you can start with all static .html pages, and replace them later on with dynamic .y pages - without changing any of your URLs. </p>
+<p>There is one small issue: the 'smart suffix search' does not work if you are using path components in the URL query parameters. For instance, <strong>http://server.com/testapp/office/login.y/floor1 </strong>will work (it will call login.y with &quot;/floor1&quot; pathinfo on the <a href="request.html">request</a>), but <strong>http://server.com/testapp/office/login/floor1 </strong>will <em>not</em> work.
+(If you want something like this to work, use a Snakelet with a suitable URL pattern).
+Note that regular query parameters <em>do</em> work: <strong>http://server.com/testapp/office/login?floor=1 </strong>works fine (it will call login.y with correct query parameters). </p>
+<p>Smart suffixes and authorization patterns: when checking authorization patterns, Snakelets takes smart suffixes into account.
+For more info see <a href="authorization.html">authorization</a>.</p>
+<h4><strong>Automatic reloading</strong></h4>
+<p>For fast development, Snakelets supports automatic page reloading. This means that when you update
+an Ypage source file, or a Snakelets module source file, the server will detect that it has been updated
+and it will reload and recompile the new version. This happens on-the-fly so you will directly see
+the changes you have made in your browser.</p>
+<p>To avoid problems and performance issues, the automatic reloading is limited to the Ypage source file
+(and templates, if any) and the snakelet module file. Imported modules are <em>not</em> reloaded.
+</p>
+<h4><strong>Page Creation Tutorial</strong></h4>
+<p>Please refer to <a href="effectivepages.html">Effective Ypages and Snakelets</a> for
+    a tutorial on creating good, maintainable web pages.</p>
+<address>
+Snakelets manual - <a href="index.html">Back to index</a>
+</address>
+</body>
+</html>
